@@ -1,10 +1,22 @@
 <ion-modal-view>
   <ion-header-bar class="bar-modal">
     <div style="background-image:url({{feed.image}});background-size: cover;background-position:center; background-repeat: none;" class="feed-modal-img">
-		<button class="button button-clear player-close" ng-click="closePlayer()"><i class="ion ion-ios-arrow-left player-close"></i></button>
+		<button class="button button-clear player-close" ng-click="closePlayerModal()"><i class="ion ion-ios-arrow-left player-close"></i></button>
   </ion-header-bar>
-  <ion-content>
-    <p>{{feed.title}}</p>
-
+  <ion-content class="feed-modal-split">
   </ion-content>
+  <div class="feed-modal-content">
+	  <h4 class="feed-modal-title">{{feed.title | limitTo:32}}{{feed.title.length > 32 ? '..':''}}</h4>
+	  <p class="feed-modal-subtitle">{{feed.source}}</p>
+  	<div class="item range slider-duration">
+		  <span>0:00</span>
+		  <input type="range" name="volume">
+		  <span>3:22</span>
+		</div>
+		<p class="feed-modal-author">Author: Johnny Goods</p>
+		<p class="feed-modal-narrator">Narrated by: Kimmie Awesome</p>
+		<a href class="feed-modal-playbtn">
+			<i class="icon ion-ios-play-outline icon-play-circle"></i>
+		</a>
+  </div>
 </ion-modal-view>

@@ -56,9 +56,12 @@ angular.module('odi.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  $scope.closePlayer = function() {
+  $scope.closePlayerModal = function() {
     $scope.modal.hide();
   };
+  $scope.closePlayer = function() {
+    $scope.audioPlayer = false;
+  }
 
   initialize();
 })

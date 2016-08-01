@@ -121,10 +121,11 @@ a.item-content.activated, a.item-content:focus{
 }
 /******** BOTTOM PLAYER ***********/
 .audio-player{
-	height: 60px;
+	display: block;
+	height: 70px;
 	width: 100%;
 	position: fixed;
-	bottom: 0;
+	bottom: 0px;
 	left: 0;
 	background-color: #111;
 	z-index: 99;
@@ -135,7 +136,7 @@ a.item-content.activated, a.item-content:focus{
   position: relative;
   padding-left: 6px;  
   cursor: pointer;
-  margin-top: -5px;
+  margin-top: 0px;
   padding-top: 0px;  
   color: #fff;
   background: none;
@@ -146,13 +147,13 @@ a.item-content.activated, a.item-content:focus{
 }
 .feed-title {
   position: absolute;
-  margin-top: -53px;
-  font-size: 18px;
+  margin-top: -50px;
+  font-size: 16px;
   margin-left: 50px;
 }
 .feed-source{
 	margin-left: 50px;
-	margin-top: -30px;
+	margin-top: -26px;
   font-size: 13px;
 	color: #ffe100;
 }
@@ -163,14 +164,24 @@ a.item-content.activated, a.item-content:focus{
 	background-color: #000;
 }
 .scroll-content {
-	background: none;
+	border: none;
 }
 
 .slide-in-up.ng-enter-active, .slide-in-up > .ng-enter-active{
 	background-color: #222;
 }
-.feed-modal-content {
+.feed-modal-split {
 	color: #fff;
+	padding: 0;
+	margin: 0;
+}
+.feed-modal-content{
+  color: #fff;
+  padding-top: 270px;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;	
 }
 .bar-modal {
 	padding: 0;
@@ -184,7 +195,36 @@ a.item-content.activated, a.item-content:focus{
 }
 .feed-modal-img {
 	width: 100%;
-	height: 300px;
+	height: 295px;
+}
+.feed-modal-title{
+	padding-bottom: 5px;
+}
+.feed-modal-subtitle{
+	color: #ffe100;
+}
+.feed-modal-author{
+	padding-top: 10px;
+}
+.icon-play-circle{
+	font-size: 80px;
+}
+.feed-modal-playbtn{
+	font-size: 120px;
+	margin-top: 20px;
+  position: relative;
+  display: inline-block;
+}
+.pause-btn {
+	float: right;
+  margin-top: -38px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: none;
+  color: #fff;
+  margin-right: 7px;	
 }
 button.player-close:focus, button.player-close:active{
 	color: #00c7ff;
@@ -395,12 +435,12 @@ input[type="range"]::-webkit-slider-thumb {
   position: relative;
   top: -1px;
   z-index: 1;
-  width: 40px;
+  width: 22px;
   height: 22px;
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
   border-radius: 40px;
-  background-color: #ccc;
+  background-color: #00c7ff;
 }
 
 /******** SEARCH PAGE ***********/
@@ -416,7 +456,7 @@ input[type="text"]{
 }
 .category{
 	padding: 20px 0px 20px 25px;
-	height: 120px;
+	height: 121px;
 }
 .category-item {
 	padding: 15px 0 15px 15px;
