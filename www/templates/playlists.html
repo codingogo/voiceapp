@@ -3,22 +3,30 @@
     <ion-list>
 	    <li class="item item-article" ng-repeat="article in articles" style="background-image:url({{article.image}}); background-size:cover; background-position:center">
 			
-			    <a class="item-thumbnail-left article-layer" href="#/app/playlists/{{article.id}}" >
+			    <!-- <a class="item-thumbnail-left article-layer" href="#/app/playlists/{{article.id}}" > -->
+			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
 				      <h2 class="article-title">{{article.title | limitTo:23}}{{article.title.length > 23 ? '..' : ''}}</h2>
 							<p class="article-source">{{article.source}}</p>
 						</div>	
 					</a>
 					<a class="play-article">
-						<span><i class="icon ion-ios-play-outline"></i></span>
+						<span ng-if="!playing" ng-click="play(article)"><i class="icon ion-ios-play-outline"></i></span>
+						<span ng-if="playing" ng-click=""><i class="icon ion-ios-pause-outline"></i></span>
 					</a>	
 					<a class="add-article" ng-click="toggleLike({{article.id}})">
 						<span ng-if="addLike"><i class="icon ion-ios-plus-outline"></i></span>
 						<span ng-if="!addLike" style="color:#ccc"><i class="icon ion-ios-minus-outline"></i></span>
 					</a>
 	    </li>
+	    <div class="audio-player" ng-if="audioPlayer">
+	    	<div class="">
+				  <button class="player-expand-arrow" ng-click="openPlayerLg({{feed}})"><i class="icon ion-ios-arrow-up"></i></button>
+				  <div class="feed-title">{{feed.title | limitTo:34}}{{feed.title.length >34?'..':''}}</div><br>
+				  <div class="feed-source">{{feed.source}}</div>
+				</div>
+	    </div>
     </ion-list>
   </ion-content>
 </ion-view>
-
 

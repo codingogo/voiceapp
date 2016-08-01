@@ -1,3 +1,4 @@
+/*focus #00c7ff*/
 body {
 	background-color: #000;
 	color: #fff;
@@ -17,7 +18,11 @@ h1, h2, h3, h4, h5, p, a {
 .center {
 	text-align: center;
 }
-/************* MODAL **************/
+/************** NAVBAR  *****************/
+.bar .button.button-icon.navbar-search:before{
+	font-size: 23px;
+}
+/************* MODAL LOGIN **************/
 .bar.bar-dark {
 	background-color: #222;
 	border-color: #222;
@@ -33,12 +38,48 @@ h1, h2, h3, h4, h5, p, a {
 	background-color: #222;
 	color: #fff;
 }
+.bar.bar-dark .title.login-title {
+	font-size: 18px;
+}
 .login-close{
 	font-size: 34px;
 	padding-right: 10px;
 }
-.input-label {
-	font-color: #999;
+.login-brand {
+	text-align: center;
+	padding: 30px 20px 10px 20px;
+	font-size: 80px;
+}
+.login-subtitle{
+	text-align: center;
+	padding: 0px 10px 40px 20px;
+	color: #ccc;
+	font-size: 14px;
+}
+.login-btn {
+	width: 100%;
+	margin: 5px 0 10px 0;
+}
+.login-btn-area{
+	padding: 20px 40px;
+}
+.social-disclaimer {
+	font-size: 12px;
+	text-align: center;
+	color: #888;
+	padding: 30px 0;
+}
+.login-icon-fb {
+	position: absolute;
+	left: 27px;
+	vertical-align: middle;
+}
+.login-icon-twitter{
+	position: absolute;
+	left: 20px;
+}
+.login-list {
+	padding-top: 25px;
 }
 /************ MENU PAGE ***********/
 .menu-list .list a {
@@ -77,6 +118,76 @@ a.item-content.activated, a.item-content:focus{
 	padding-left: 130px;
 	padding-right: 15px;
 	min-height: 98px;
+}
+/******** BOTTOM PLAYER ***********/
+.audio-player{
+	height: 60px;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #111;
+	z-index: 99;
+	padding: 5px 15px;
+}
+.player-expand-arrow{
+  font-size: 40px;
+  position: relative;
+  padding-left: 6px;  
+  cursor: pointer;
+  margin-top: -5px;
+  padding-top: 0px;  
+  color: #fff;
+  background: none;
+  border: none;  
+}
+.player-expand-arrow:focus, .player-expand-arrow:active{
+	color: #00c7ff;
+}
+.feed-title {
+  position: absolute;
+  margin-top: -53px;
+  font-size: 18px;
+  margin-left: 50px;
+}
+.feed-source{
+	margin-left: 50px;
+	margin-top: -30px;
+  font-size: 13px;
+	color: #ffe100;
+}
+/******** PLAYER MODAL ***********/
+.feed-modal {
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+}
+.scroll-content {
+	background: none;
+}
+
+.slide-in-up.ng-enter-active, .slide-in-up > .ng-enter-active{
+	background-color: #222;
+}
+.feed-modal-content {
+	color: #fff;
+}
+.bar-modal {
+	padding: 0;
+}
+.player-close {
+  font-size: 36px;
+  z-index: 999;
+  top: 15px;
+  left: 15px;
+  color: #fff;
+}
+.feed-modal-img {
+	width: 100%;
+	height: 300px;
+}
+button.player-close:focus, button.player-close:active{
+	color: #00c7ff;
 }
 
 /******** ARTICLE PAGE ***********/

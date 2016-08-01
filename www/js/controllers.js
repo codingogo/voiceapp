@@ -12,12 +12,10 @@ angular.module('odi.controllers', [])
     $scope.modal = modal;
   });
 
-  // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
 
-  // Open the login modal
   $scope.login = function() {
     $scope.modal.show();
   };
@@ -32,25 +30,35 @@ angular.module('odi.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-
-  // Users
-  $scope.createUser = function(user){
-
-  };
-
-  $scope.signIn = function() {
-    $state.go('app.categories');
-  }
 })
 
-.controller('PlaylistsCtrl', function($scope, Articles) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal) {
   var initialize = function() {
     $scope.addLike = true;
-  }
+    $scope.audioPlayer = false;
+    $scope.playing = false;
+  };
   $scope.toggleLike = function(articleId) {
     $scope.addLike = !$scope.addLike;
-  }
+  };
+  $scope.play = function(article){
+    $scope.audioPlayer = true;
+    $scope.feed = article;
+  };
+  $scope.openPlayerLg = function(feed){
+    $scope.modal.show(feed);
+    console.log('modal feed', feed)
+  };
   $scope.articles = Articles.all();
+
+  $ionicModal.fromTemplateUrl('templates/feed-player.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.closePlayer = function() {
+    $scope.modal.hide();
+  };
 
   initialize();
 })
@@ -67,6 +75,10 @@ angular.module('odi.controllers', [])
   };
 
   initialize();
+})
+
+.controller('AudioplayerCtrl', function($scope, $stateParams, Articles){
+
 })
 
 .controller('CategoriesCtrl', function($scope) {

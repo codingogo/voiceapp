@@ -4,6 +4,10 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
 
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search navbar-search" menu-toggle="right"></button>
+      </ion-nav-buttons>
+
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -24,9 +28,9 @@
         <ion-item menu-close href="#/app/categories">
           <i class="icon ion-android-list menu-icon"></i> Categories
         </ion-item>
-        <ion-item menu-close href="#/app/search">
+        <!-- <ion-item menu-close href="#/app/search">
           <i class="icon ion-search menu-icon"></i> Search
-        </ion-item>
+        </ion-item> -->
         <ion-item menu-close href="#/app/setting">
           <i class="icon ion-gear-a menu-icon"></i> Setting
         </ion-item>
@@ -36,4 +40,16 @@
       </ion-list>
     </ion-content>
   </ion-side-menu>
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title logo">Search</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list class="menu-list">
+        <ion-item menu-close href="#/app/search">
+          <i class="icon ion-search menu-icon"></i> Search
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>  
 </ion-side-menus>

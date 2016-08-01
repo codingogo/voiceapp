@@ -73,3 +73,19 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/categories');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
