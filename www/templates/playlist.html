@@ -1,0 +1,74 @@
+<ion-view view-title="{{article.shortTitle}}">
+  <ion-content>
+		<div class="article-detail-img" style="background-image:url({{article.image}});">
+			<div class="article-layer"></div>
+		</div>
+		<a class="add-article-btn">
+			<span ng-if="addLike"><i class="icon ion-ios-plus-outline"></i></span>
+			<span ng-if="!addLike"><i class="icon ion-ios-minus-outline"></i></span>
+		</a>
+		<div class="article-header">
+			<h4>{{article.title}}</h4>
+		</div>
+		<div class="like-votes">
+			<p><i class="icon ion-heart"></i> 23</p>
+		</div>
+		<div class="listened-votes">
+			<p><i class="icon ion-headphone"></i> 52</p>
+		</div>
+
+		<div class="article-detail">
+			<p>{{article.description}}</p>
+		</div>
+		<div class="article-social">
+			SHARE
+			<div class="row row-center center">
+			  <div class="col-20 social-btn">
+			  	<i class="icon ion-social-facebook btn"></i>
+			  </div>
+			  <div class="col-20 social-btn">
+			  	<i class="icon ion-social-twitter btn"></i>
+			  </div>
+			  <div class="col-20 social-btn">
+			  	<i class="icon ion-social-snapchat btn"></i>
+			  </div>
+			  <div class="col-20 social-btn">
+			  	<i class="icon ion-social-google btn"></i>
+			  </div>
+			  <div class="col-20 social-btn">
+			  	<i class="icon ion-email btn"></i>
+			  </div>
+			</div>
+		</div>
+
+  </ion-content>
+
+	<!-- Player Tracking -->
+	<div class="tracking">
+		<div class="item range">
+		  <p>0:00</p>
+		  <input type="range" name="volume">
+		  <p>02:35</p>
+		</div>
+	</div>
+
+	<!-- Article Player -->
+	<div class="tabs tabs-icon-only">
+	  <a class="tab-item">
+	    <i class="icon ion-refresh"></i>
+	  </a>
+	  <a class="tab-item">
+	    <i class="icon ion-ios-skipbackward-outline"></i>
+	  </a>
+	  <a class="tab-item">
+	    <i class="icon ion-ios-play-outline"></i>
+	  </a>
+	  <a class="tab-item">
+	    <i class="icon ion-ios-skipforward-outline"></i>
+	  </a>
+		<a class="tab-item">
+	    2X
+	  </a>	  
+	</div>
+
+</ion-view>
