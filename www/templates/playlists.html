@@ -24,6 +24,7 @@
 	<div class="audio-player" ng-if="audioPlayer">
   	<div class="">
 		  <button class="player-expand-arrow" ng-click="openPlayerLg({{feed}})"><i class="icon ion-ios-arrow-up"></i></button>
+		  <!-- <div style="background-image:url({{feed.image}})" class="feed-avatar"><span class="feed-avatar-layer"></span></div> -->
 		  <div class="feed-title">{{feed.title | limitTo:28}}{{feed.title.length >28?'..':''}}</div><br>
 		  <div class="feed-source">{{feed.source}}</div>
 		  <button class="pause-btn" ng-click="closePlayer()"><i class="icon ion-ios-pause"></i></button>

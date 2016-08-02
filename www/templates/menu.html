@@ -5,7 +5,10 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-search navbar-search" menu-toggle="right"></button>
+        <button ng-if="!user" class="button button-icon button-clear" ng-click="login()">login</button>
+        <button ng-if="user" class="button button-icon button-clear" menu-toggle="right">
+          <img src="{{user.avatar}}" class="avatar">
+        </button>
       </ion-nav-buttons>
 
       <ion-nav-buttons side="left">
@@ -16,6 +19,7 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
+  <!-- Left Navigation -->
   <ion-side-menu side="left">
     <ion-header-bar class="bar-dark">
       <h1 class="title logo">Odi</h1>
@@ -28,27 +32,29 @@
         <ion-item menu-close href="#/app/categories">
           <i class="icon ion-android-list menu-icon"></i> Categories
         </ion-item>
-        <!-- <ion-item menu-close href="#/app/search">
+        <ion-item menu-close href="#/app/search">
           <i class="icon ion-search menu-icon"></i> Search
-        </ion-item> -->
-        <ion-item menu-close href="#/app/setting">
-          <i class="icon ion-gear-a menu-icon"></i> Setting
-        </ion-item>
-        <ion-item menu-close href ng-click="login()">
+        </ion-item>        
+        <ion-item menu-close href ng-click="login()" ng-if="!user">
           <i class="icon ion-power menu-icon"></i> Login
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
+
+  <!-- Right Navigation -->
   <ion-side-menu side="right">
     <ion-header-bar class="bar-dark">
-      <h1 class="title logo">Search</h1>
+      <h1 class="title logo">Profile</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list class="menu-list">
-        <ion-item menu-close href="#/app/search">
-          <i class="icon ion-search menu-icon"></i> Search
-        </ion-item>
+        <ion-item menu-close href="#/app/setting">
+          <i class="icon ion-gear-a menu-icon"></i> Setting
+        </ion-item>      
+        <ion-item ng-click="logout()" menu-close href ng-if="user">
+          <i class="icon ion-log-out menu-icon"></i> Logout
+        </ion-item>      
       </ion-list>
     </ion-content>
   </ion-side-menu>  

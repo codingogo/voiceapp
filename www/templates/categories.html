@@ -1,15 +1,13 @@
 <ion-view view-title="CHOOSE CATEGORIES">
   <ion-content>
-    <ul>
-    	<a href="" class="category-link-tag">
-    		<li href class="category" ng-repeat="category in categories" style="background-image:url({{category.imageUrl}}); background-size: cover; background-position: center">
-		    	<div href class="category-layer">
-		    		<div class="category-title">
-		    			{{category.title}}
-		    		</div>
-		    	</div>	
-    		</li>
-    	</a>
-    </ul>
+    <ion-list ng-repeat="category in categories">
+  		<ion-item menu-close href="#/app/playlists" class="category"  back-img="{{category.imageUrl}}" ng-click="setActive(category)" ng-class="{active: activeCategory === category}">
+	    	<!-- <a href class="category-layer">
+        </a>   -->
+    		<div class="category-title" >
+    			{{category.title | uppercase}}
+    		</div>
+  		</ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -27,11 +27,6 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
     controller: 'AppCtrl'
   })
 
-  // .state('login', {
-  //   url: '/login',
-  //   templateUrl: 
-  // })
-
   .state('app.search', {
     url: '/search',
     views: {

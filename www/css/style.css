@@ -22,6 +22,10 @@ h1, h2, h3, h4, h5, p, a {
 .bar .button.button-icon.navbar-search:before{
 	font-size: 23px;
 }
+.avatar {
+  width: 32px;
+  border-radius: 50%;	
+}
 /************* MODAL LOGIN **************/
 .bar.bar-dark {
 	background-color: #222;
@@ -157,6 +161,25 @@ a.item-content.activated, a.item-content:focus{
   font-size: 13px;
 	color: #ffe100;
 }
+.feed-avatar {
+	position: absolute;
+  width: 70px;
+  height: 70px;
+  z-index: -1;
+  left: 0px;
+  bottom: 0px;	
+  background-size: cover;
+  background-position: center;
+  background-repeat: none;
+}
+.feed-avatar-layer {
+  background-color: rgba(5,5,5, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;		
+}
 /******** PLAYER MODAL ***********/
 .feed-modal {
 	width: 100%;
@@ -187,11 +210,12 @@ a.item-content.activated, a.item-content:focus{
 	padding: 0;
 }
 .player-close {
-  font-size: 36px;
+  font-size: 50px;
   z-index: 999;
-  top: 15px;
-  left: 15px;
+  top: 25px;
+  left: 25px;
   color: #fff;
+  text-shadow: 1px 1px 6px #000;
 }
 .feed-modal-img {
 	width: 100%;
@@ -249,7 +273,7 @@ button.player-close:focus, button.player-close:active{
 	text-shadow: 1px 1px 5px #555;
 }
 .article-layer {
-  background-color: rgba(62, 62, 62, 0.4);
+  background-color: rgba(5,5,5, 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -431,14 +455,15 @@ h2.article-title {
 	background-color: #444;
 }
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
   position: relative;
   top: -1px;
   z-index: 1;
   width: 22px;
   height: 22px;
+  -webkit-appearance: none;
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
+  -o-border-radius: 40px;
   border-radius: 40px;
   background-color: #00c7ff;
 }
@@ -455,13 +480,13 @@ input[type="text"]{
   margin-top: 70px;
 }
 .category{
-	padding: 20px 0px 20px 25px;
+	/*padding: 20px 0px 20px 25px;*/
 	height: 121px;
+	text-decoration: none;
 }
 .category-item {
 	padding: 15px 0 15px 15px;
 	width: 100%;
-/*	border-top: 1px solid #555;*/
 }
 .category-item:active{
 	background-color: #ccc;
@@ -470,17 +495,29 @@ input[type="text"]{
 	position: relative;
 	text-decoration: none;
 	padding-left: 0;
+	z-index: 9999;
+	text-shadow: 1px 1px 6px #777;
 }
 .category-layer {
-	/*position: absolute;*/
-	top:0;
-	left: 0;
+  background-color: rgba(5,5,5, 0.05);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;	
+}
+.category-layer:active{
+	background-color: rgba(5,5,5, 0.3);
+}
+.active{
+	color: #00c7ff;
+	background-color: red;
 	width: 100%;
-	height: 100%;
+	z-index: 99;
+	background: #000;
+	/*border-left: 5px solid #00c7ff*/
 }
-.category-link-tag{
-	text-decoration: none;
-}
+
 
 
 

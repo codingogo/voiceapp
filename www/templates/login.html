@@ -6,16 +6,20 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="doLogin()">
+   <!--  <form ng-submit="doLogin()"> -->
       <div class="list login-list">
         <h1 class="login-brand">Odi</h1>
-        <p class="login-subtitle">Please login to access your saved feed.</p>
+        <p class="login-subtitle">Please login to access your profile.</p>
         <div class="login-btn-area">      
-          <button class="button button-positive login-btn" type="submit"><span><i class="icon ion-social-facebook login-icon-fb"></i></span>Login with Facebook</button> 
-          <button class="button button-calm login-btn" type="submit"><span><i class="icon ion-social-twitter login-icon-twitter"></i></span>Login with Twitter</button>  
-          <p class="social-disclaimer">We do NOT post anything on Facebook or Twitter without your permission. By logging in, you agree to our privacy policy & terms of service.</p>  
+          <button class="button button-positive login-btn" ng-click="loginFacebook()">
+            <span><i class="icon ion-social-facebook login-icon-fb"></i></span>Login with Facebook
+          </button> 
+          <button class="button button-calm login-btn" ng-click="loginTwitter()">
+            <span><i class="icon ion-social-twitter login-icon-twitter"></i></span>Login with Twitter
+          </button>  
+          <p class="social-disclaimer">We do NOT post anything on Facebook nor Twitter without your permission. By logging in, you agree to our privacy policy & terms of service.</p>  
         </div> 
       </div>
-    </form>
+    <!-- </form> -->
   </ion-content>
 </ion-modal-view>
