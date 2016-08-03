@@ -1,7 +1,6 @@
 AppCtrl
 .controller('CategoriesCtrl', function($scope) {
 	$scope.setActive=function(category){
-    console.log(category);
     $scope.activeCategory = category;
   };
 

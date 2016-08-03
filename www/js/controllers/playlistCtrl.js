@@ -12,19 +12,6 @@ AppCtrl
     $scope.categoryFilter = '';
   }
 
-  $scope.toggleLike = function(articleId) {
-    $scope.addLike = !$scope.addLike;
-  };
-
-  $scope.play = function(article){
-    $scope.audioPlayer = true;
-    $scope.feed = article;
-  };
-
-  $scope.openPlayerLg = function(feed){
-    $scope.modal.show(feed);
-  };
-
   $scope.articles = Articles.all();
   
   $ionicModal.fromTemplateUrl('templates/feed-player.html', {
@@ -33,12 +20,35 @@ AppCtrl
     $scope.modal = modal;
   });
 
-  $scope.closePlayerModal = function() {
-    $scope.modal.hide();
+  $scope.state = { selected: undefined};
+  $scope.togglePlay = function(article, idx){
+    $scope.audioPlayer = true;
+    $scope.feed = article;
+    $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
+    if($scope.state.selected !== idx){
+      $scope.audioPlayer = false;
+    }
   };
 
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
+    $scope.state = { selected: undefined};
+  }
+
+  $scope.openPlayerLg = function(feed){
+    $scope.modal.show(feed);
+  };
+
+  $scope.closePlayerModal = function() {
+    $scope.modal.hide();
+  };
+
+  $scope.addArticle = function(article) {
+    $scope.addLike = false;
+  }
+
+  $scope.removeArticle = function(article) {
+    $scope.addLike = true;
   }
 
   initialize();

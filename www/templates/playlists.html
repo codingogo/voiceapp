@@ -1,9 +1,7 @@
 <ion-view view-title="FEED">
   <ion-content>
     <ion-list>
-	    <li class="item item-article" ng-repeat="article in articles | filter:categoryFilter" style="background-image:url({{article.image}}); background-size:cover; background-position:center">
-			
-			    <!-- <a class="item-thumbnail-left article-layer" href="#/app/playlists/{{article.id}}" > -->
+	    <li class="item item-article" ng-repeat="article in articles | filter:categoryFilter track by $index" style="background-image:url({{article.image}}); background-size:cover; background-position:center">
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
 				      <h2 class="article-title">{{article.title | limitTo:23}}{{article.title.length > 23 ? '..' : ''}}</h2>
@@ -11,12 +9,11 @@
 						</div>	
 					</a>
 					<a class="play-article">
-						<span ng-if="!playing" ng-click="play(article)"><i class="icon ion-ios-play-outline"></i></span>
-						<span ng-if="playing" ng-click=""><i class="icon ion-ios-pause-outline"></i></span>
+						<span ng-if="!playing" ng-click="togglePlay(article, $index)"><i class="icon " ng-class="{'ion-ios-play-outline': $index != state.selected, 'ion-ios-pause-outline': $index == state.selected}"></i></span>
 					</a>	
-					<a class="add-article" ng-click="toggleLike({{article.id}})">
-						<span ng-if="addLike"><i class="icon ion-ios-plus-outline"></i></span>
-						<span ng-if="!addLike" style="color:#ccc"><i class="icon ion-ios-minus-outline"></i></span>
+					<a class="add-article">
+						<span ng-if="addLike" ng-click="addArticle(article)"><i class="icon ion-ios-plus-outline"></i></span>
+						<span ng-if="!addLike" ng-click="removeArticle(article)" style="color:#ccc"><i class="icon ion-ios-minus-outline"></i></span>
 					</a>
 	    </li>
     </ion-list>
