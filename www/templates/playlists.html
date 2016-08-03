@@ -12,8 +12,7 @@
 						<span ng-if="!playing" ng-click="togglePlay(article, $index)"><i class="icon " ng-class="{'ion-ios-play-outline': $index != state.selected, 'ion-ios-pause-outline': $index == state.selected}"></i></span>
 					</a>	
 					<a class="add-article">
-						<span ng-if="addLike" ng-click="addArticle(article)"><i class="icon ion-ios-plus-outline"></i></span>
-						<span ng-if="!addLike" ng-click="removeArticle(article)" style="color:#ccc"><i class="icon ion-ios-minus-outline"></i></span>
+						<span ng-if="addLike" ng-click="addArticle(article, $index)"><i class="icon " ng-class="{'ion-ios-plus-outline': $index != addState.selected, 'ion-ios-minus-outline': $index == addState.selected}"></i></span>
 					</a>
 	    </li>
     </ion-list>

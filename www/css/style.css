@@ -307,12 +307,18 @@ h2.article-title {
   right: 22px;
   bottom: 16px;
 	font-size: 35px;
-  color: #00c7ff;
+  /*color: #00c7ff;*/
  	text-shadow: 1px 1px 5px #555;
 }
 .add-article:active{
 	border-radius: 50%;
 	color: #fff;
+}
+.icon.ion-ios-plus-outline{
+	color: #00c7ff;
+}
+.icon.ion-ios-minus-outline{
+	color: #ddd;
 }
 .play-article{
 	cursor: pointer;

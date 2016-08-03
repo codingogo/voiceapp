@@ -4,6 +4,8 @@ AppCtrl
     $scope.addLike = true;
     $scope.audioPlayer = false;
     $scope.playing = false; 
+    $scope.state = { selected: undefined};
+    $scope.addState = { selected: undefined};    
   }; 
 
   if ($stateParams.category != '' || $stateParams.category == undefined) {
@@ -20,7 +22,6 @@ AppCtrl
     $scope.modal = modal;
   });
 
-  $scope.state = { selected: undefined};
   $scope.togglePlay = function(article, idx){
     $scope.audioPlayer = true;
     $scope.feed = article;
@@ -29,6 +30,13 @@ AppCtrl
       $scope.audioPlayer = false;
     }
   };
+
+  $scope.addArticle = function(article, idx) {
+    $scope.addState.selected = ($scope.addState.selected != idx ? idx : undefined);
+    if($scope.addState.selected !== idx){
+      $scope.addLike = true;
+    }
+  }
 
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
@@ -42,10 +50,6 @@ AppCtrl
   $scope.closePlayerModal = function() {
     $scope.modal.hide();
   };
-
-  $scope.addArticle = function(article) {
-    $scope.addLike = false;
-  }
 
   $scope.removeArticle = function(article) {
     $scope.addLike = true;
