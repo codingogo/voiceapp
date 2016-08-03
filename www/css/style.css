@@ -326,7 +326,7 @@ h2.article-title {
   background: none;
   border: none;
   color: #fff;
-  right: 68px;
+  right: 72px;
   bottom: 12px;
   font-size: 42px;
   text-shadow: 1px 1px 5px #555;
@@ -524,8 +524,17 @@ input[type="text"]{
 
 
 
-
-
+/***************** MEDIA QUERY *****************/
+@media (min-width: 680px){
+	.modal {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 240px;
+    width: 100%;
+	}
+}
 
 
 
