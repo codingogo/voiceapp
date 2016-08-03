@@ -47,7 +47,7 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
   })
 
   .state('app.playlists', {
-    url: '/playlists',
+    url: '/playlists/:category',
     views: {
       'menuContent': {
         templateUrl: 'templates/playlists.html',
@@ -62,6 +62,16 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
       'menuContent': {
         templateUrl: 'templates/playlist.html',
         controller: 'PlaylistCtrl'
+      }
+    }
+  })
+
+  .state('app.setting', {
+    url: '/setting',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/setting.html',
+        controller: 'SettingCtrl'
       }
     }
   });

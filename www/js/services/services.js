@@ -11,7 +11,7 @@ var AppService = angular.module('odi.services', [])
     category: "travel"
   },{
     id: 1,
-    title: "Security experts have cloned all seven TSA master keys",
+    title: "Security travel experts have cloned all seven TSA master keys",
     description: "Key escrow — the process of keeping a set of keys for yourself “just in case” — has always been the U.S. government’s modus operandi when it comes to security. From the disastrous Clipper chip to today, the government has always wanted a back door into encryption and security. That plan backfired for the TSA. The TSA, as you’ll remember, offers a set of",
     image: "http://cdn.wallpaper.com/main/00_vessels_0.jpg",
     media: "",
@@ -40,6 +40,14 @@ var AppService = angular.module('odi.services', [])
     media: "",
     source: "CNET",
     category: "space"
+  }, {
+    id: 5,
+    title: "Iggy Pop Dedicates Two-Hour Radio Show to David Bowie",
+    description: "During the latest episode of his BBC Radio 6 program “Iggy Confidential,” Iggy Pop spent two hours paying tribute to his late friend, David Bowie. He played songs from across Bowie’s discography. “The way I chose them was from memory,” he said of the playlist. “I took out a piece of paper and a pen and remembered what I liked at different times.” As he played different songs, Iggy discussed his memories of Bowie. Listen to the entire thing here.",
+    image: "http://cdn2.pitchfork.com/news/67256/4a9b0ac3.jpg",
+    media: "",
+    source: "Pitch Fork",
+    category: "music"
   }];
 
   return {

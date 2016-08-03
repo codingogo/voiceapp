@@ -1,11 +1,17 @@
 AppCtrl
-.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams) {
   var initialize = function() {
     $scope.addLike = true;
     $scope.audioPlayer = false;
-    $scope.playing = false;
-  };
-  
+    $scope.playing = false; 
+  }; 
+
+  if ($stateParams.category != '' || $stateParams.category == undefined) {
+    $scope.categoryFilter = $stateParams.category;
+  } else {
+    $scope.categoryFilter = '';
+  }
+
   $scope.toggleLike = function(articleId) {
     $scope.addLike = !$scope.addLike;
   };
@@ -20,7 +26,7 @@ AppCtrl
   };
 
   $scope.articles = Articles.all();
-
+  
   $ionicModal.fromTemplateUrl('templates/feed-player.html', {
     scope: $scope
   }).then(function(modal) {

@@ -38,6 +38,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           $scope.user = user;
           $rootScope.user = user;
           $scope.user.avatar = user.facebook.profileImageURL;
+          $scope.user.name = user.facebook.displayName;
           $state.go('app.categories');
         })
       }
@@ -60,6 +61,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           $scope.user = user;
           $rootScope.user = user;
           $scope.user.avatar = user.twitter.profileImageURL;
+          $scope.user.name = user.twitter.displayName;
           $state.go('app.categories');
         })
       }
