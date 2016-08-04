@@ -1,4 +1,4 @@
-angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.services', 'firebase'])
+angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {

@@ -1,5 +1,5 @@
 AppCtrl
-.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope) {
   var initialize = function() {
     $scope.addLike = true;
     $scope.audioPlayer = false;
@@ -28,6 +28,7 @@ AppCtrl
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
       $scope.audioPlayer = false;
+      $rootScope.audioPlayer = false;
     }
   };
 
