@@ -1,4 +1,7 @@
 /*focus #00c7ff*/
+.range input {
+	min-width: 220px;
+}
 body {
 	background-color: #000;
 	color: #fff;
@@ -270,7 +273,7 @@ button.player-close:focus, button.player-close:active{
   padding-left: 15px;
   bottom: 12px;
 	height: 90px
-	text-shadow: 1px 1px 5px #555;
+	text-shadow: 1px 1px 6px #555;
 }
 .article-layer {
   background-color: rgba(5,5,5, 0.4);

@@ -1,20 +1,23 @@
 <ion-view view-title="FEED">
   <ion-content>
     <ion-list>
-	    <li class="item item-article" ng-repeat="article in articles | filter:categoryFilter track by $index" style="background-image:url({{article.image}}); background-size:cover; background-position:center">
+	    <ion-audio-track class="item item-article" ng-repeat="article in articles | filter:categoryFilter track by $index" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
+	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
 				      <h2 class="article-title">{{article.title | limitTo:23}}{{article.title.length > 23 ? '..' : ''}}</h2>
 							<p class="article-source">{{article.source}}</p>
 						</div>	
 					</a>
-					<a class="play-article">
-						<span ng-if="!playing" ng-click="togglePlay(article, $index)"><i class="icon " ng-class="{'ion-ios-play-outline': $index != state.selected, 'ion-ios-pause-outline': $index == state.selected}"></i></span>
+					<ion-spinner icon="ios"></ion-spinner>
+					<a class="play-article" ion-audio-play ng-click="togglePlay(article, $index)">
+						<!-- <span ng-if="!playing" ng-click="togglePlay(article, $index)"><i class="icon " ng-class="{'ion-ios-play-outline': $index != state.selected, 'ion-ios-pause-outline': $index == state.selected}"></i></span> -->
 					</a>	
 					<a class="add-article">
 						<span ng-if="addLike" ng-click="addArticle(article, $index)"><i class="icon " ng-class="{'ion-ios-plus-outline': $index != addState.selected, 'ion-ios-minus-outline': $index == addState.selected}"></i></span>
 					</a>
-	    </li>
+				</ion-audio-controls>
+	    </ion-audio-track>
     </ion-list>
   </ion-content>
 	<div class="audio-player" ng-if="audioPlayer">

@@ -9,9 +9,10 @@
 	  <h4 class="feed-modal-title">{{feed.title | limitTo:32}}{{feed.title.length > 32 ? '..':''}}</h4>
 	  <p class="feed-modal-subtitle">{{feed.source}}</p>
   	<div class="item range slider-duration">
-		  <span>0:00</span>
+  		<ion-audio-progress-bar track="myTrack" display-time></ion-audio-progress-bar>
+		  <!-- <span>0:00</span>
 		  <input type="range" name="volume">
-		  <span>3:22</span>
+		  <span>3:22</span> -->
 		</div>
 		<p class="feed-modal-author">Author: {{feed.author}}</p>
 		<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
