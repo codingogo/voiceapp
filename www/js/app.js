@@ -1,4 +1,4 @@
-angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova'])
+angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova', 'ionic-audio'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
@@ -72,6 +72,16 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
       'menuContent': {
         templateUrl: 'templates/setting.html',
         controller: 'SettingCtrl'
+      }
+    }
+  })
+
+  .state('app.test', {
+    url: '/test',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/test.html',
+        controller: 'TestCtrl'
       }
     }
   });
