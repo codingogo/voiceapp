@@ -424,8 +424,8 @@ function ionAudioPlay($ionicGesture, $timeout) {
 
         var init = function() {
             isLoading = false;
-            element.addClass('ion-play');
-            element.removeClass('ion-pause');
+            element.addClass('ion-ios-play-outline');
+            element.removeClass('ion-ios-pause-outline');
             element.text(attrs.textPlay);
         };
 
@@ -436,7 +436,7 @@ function ionAudioPlay($ionicGesture, $timeout) {
         };
 
         var togglePlaying = function() {
-            element.toggleClass('ion-play ion-pause');
+            element.toggleClass('ion-ios-play-outline ion-ios-pause-outline');
             setText();
         };
 

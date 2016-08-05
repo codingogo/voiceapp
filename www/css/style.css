@@ -1,7 +1,4 @@
 /*focus #00c7ff*/
-.range input {
-	min-width: 188px;
-}
 body {
 	background-color: #000;
 	color: #fff;
@@ -256,7 +253,9 @@ a.item-content.activated, a.item-content:focus{
 button.player-close:focus, button.player-close:active{
 	color: #00c7ff;
 }
-
+.range input {
+	min-width: 188px;
+}
 /******** ARTICLE PAGE ***********/
 .playlists-img{
 	position: absolute;
@@ -341,6 +340,15 @@ h2.article-title {
 	font-size: 13px;
 	color: #ffe100;
 	text-shadow: 1px 1px 5px #555;
+}
+.spinner-lines {
+  stroke: #ffe100;
+  fill: #ffe100;
+  font-size: 120px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin-left: 43%;
 }
 /******** ARTICLE DETAIL PAGE ***********/
 .article-detail {
