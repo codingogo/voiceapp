@@ -1,5 +1,6 @@
 AppCtrl
 .controller('CategoriesCtrl', function($scope) {
+
   $scope.setActive=function(category){
     $scope.activeCategory = category;
   };
@@ -16,7 +17,7 @@ AppCtrl
     },{
       id: 4, title: 'space', imageUrl:"http://cache1.asset-cache.net/xd/503936820.jpg?v=1&c=IWSAsset&k=2&d=DF8D445051B40C749E1C9693F348F87C4E7679DD01108BC6D7AA5656A2D92D71B74067DC4F41F14B"
     }
-  ]
+  ];
 })
 
 .directive('backImg', function(){
