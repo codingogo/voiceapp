@@ -1,4 +1,4 @@
-<ion-view view-title="CHOOSE CATEGORIES">
+<ion-view view-title="CATEGORIES">
   <ion-content>
     <ion-list ng-repeat="category in categories">
   		<ion-item menu-close href="#/app/playlists/{{category.title}}" class="category"  back-img="{{category.imageUrl}}" ng-click="setActive(category)" ng-class="{active: activeCategory === category}">

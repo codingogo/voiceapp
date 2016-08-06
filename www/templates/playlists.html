@@ -1,7 +1,7 @@
 <ion-view view-title="FEED">
   <ion-content>
     <ion-list>
-	    <ion-audio-track class="item item-article" ng-repeat="article in articles | filter:categoryFilter track by $index" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
+	    <ion-audio-track class="item item-article" ng-repeat="article in articles | filter:categoryFilter" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
 	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
@@ -22,10 +22,9 @@
 	<div class="audio-player" ng-if="audioPlayer">
   	<div class="">
 		  <button class="player-expand-arrow" ng-click="openPlayerLg({{feed}})"><i class="icon ion-ios-arrow-up"></i></button>
-		  <!-- <div style="background-image:url({{feed.image}})" class="feed-avatar"><span class="feed-avatar-layer"></span></div> -->
 		  <div class="feed-title">{{feed.title | limitTo:28}}{{feed.title.length >28?'..':''}}</div><br>
 		  <div class="feed-source">{{feed.source}}</div>
-		  <button class="pause-btn" ng-click="closePlayer()"><i class="icon ion-ios-pause"></i></button>
+		  <button class="pause-btn" ng-click="stopPlayback()"><i class="icon ion-ios-pause"></i></button>
 		</div>
   </div>
 </ion-view>

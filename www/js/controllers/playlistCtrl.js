@@ -1,5 +1,5 @@
 AppCtrl
-.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager) {
   var initialize = function() {
     $scope.addLike = true;
     $scope.audioPlayer = false;
@@ -28,7 +28,7 @@ AppCtrl
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
       $scope.audioPlayer = false;
-      $rootScope.audioPlayer = false;
+      // $rootScope.audioPlayer = false;
     }
   };
 
@@ -47,6 +47,23 @@ AppCtrl
   $scope.openPlayerLg = function(feed){
     $scope.modal.show(feed);
   };
+
+  $scope.test = function(){
+    alert('test');
+  }
+
+  // bind stop button in view
+  $scope.stopPlayback = function() {
+      MediaManager.stop();
+      
+      $scope.audioPlayer = false;
+      $scope.state = { selected: undefined};    
+  };
+
+  // stop any track before leaving current view
+  $scope.$on('$ionicView.beforeLeave', function() {
+      MediaManager.stop();
+  });
 
   $scope.closePlayerModal = function() {
     $scope.modal.hide();
