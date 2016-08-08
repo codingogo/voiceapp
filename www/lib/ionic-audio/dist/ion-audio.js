@@ -348,7 +348,7 @@ function ionAudioProgressBar(MediaManager) {
             track: '=?'
         },
         template:
-            '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}} - {{track.artist}}</h2>' +
+            '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}}</h2>' +
             '<div class="range">' +
             '<ion-audio-progress track="track"></ion-audio-progress>' +
             '<input type="range" name="volume" min="0" max="{{track.duration}}" ng-model="track.progress" on-release="sliderRelease()" disabled>' +

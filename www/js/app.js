@@ -66,6 +66,16 @@ angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.ser
     }
   })
 
+  .state('app.savedlist', {
+    url: '/savedlist',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/savedlist.html',
+        controller: 'SavedListCtrl'
+      }
+    }
+  })
+
   .state('app.setting', {
     url: '/setting',
     views: {

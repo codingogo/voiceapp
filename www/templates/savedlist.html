@@ -1,4 +1,4 @@
-<ion-view view-title="FEED">
+<ion-view view-title="PLAYLIST">
   <ion-content>
     <ion-list>
 	    <ion-audio-track class="item item-article" ng-repeat="article in articles | filter:categoryFilter" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
@@ -11,12 +11,11 @@
 					</a>
 					<ion-spinner icon="lines"></ion-spinner>
 					
-					<!-- diable click during track load -->
-					<a ion-audio-play ng-click="togglePlay(article, $index)" class="play-article">
+					<a ion-audio-play ng-click="play(article, $index)" class="play-article">
 					</a>	
 				
-					<a class="add-article" ng-if="addLike">
-						<span ng-click="addArticle(article, $index, user)"><i class="icon " ng-class="{'ion-ios-plus-outline': $index != addState.selected, 'ion-ios-checkmark-outline': $index == addState.selected}"></i></span>
+					<a class="remove-article" ng-click="removeArticle(article)">
+						<span><i class="icon ion-ios-minus-outline"></i></span>
 					</a>
 				</ion-audio-controls>
 	    </ion-audio-track>

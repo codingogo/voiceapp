@@ -7,7 +7,7 @@
       <ion-nav-buttons side="right">
         <button ng-if="!user" class="button button-icon button-clear" ng-click="login()">login</button>
         <button ng-if="user" class="button button-icon button-clear" menu-toggle="right">
-          <img src="{{user.avatar}}" class="avatar">
+          <img ng-src="{{user.avatar? user.avatar: null}}" class="avatar">
         </button>
       </ion-nav-buttons>
 
@@ -32,9 +32,9 @@
         <ion-item menu-close href="#/app/playlists/{{''}}">
           <i class="icon ion-ios-pulse-strong menu-icon"></i> Feed
         </ion-item>
-        <ion-item menu-close ui-sref="app.search">
+        <!-- <ion-item menu-close ui-sref="app.search">
           <i class="icon ion-search menu-icon"></i> Search
-        </ion-item>        
+        </ion-item>  -->      
         <ion-item menu-close href ng-click="login()" ng-if="!user">
           <i class="icon ion-power menu-icon"></i> Login
         </ion-item>
@@ -49,9 +49,12 @@
     </ion-header-bar>
     <ion-content>
       <ion-list class="menu-list">
-        <ion-item menu-close ui-sref="app.setting">
+        <ion-item menu-close href="#/app/savedlist" ng-if="user">
+          <i class="icon ion-android-done menu-icon"></i> Saved
+        </ion-item> 
+        <!-- <ion-item menu-close ui-sref="app.setting">
           <i class="icon ion-gear-a menu-icon"></i> Setting
-        </ion-item>      
+        </ion-item>  -->     
         <ion-item ng-click="logout()" menu-close href ng-if="user">
           <i class="icon ion-log-out menu-icon"></i> Logout
         </ion-item>      

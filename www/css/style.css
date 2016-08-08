@@ -275,7 +275,7 @@ button.player-close:focus, button.player-close:active{
 	text-shadow: 1px 1px 6px #555;
 }
 .article-layer {
-  background-color: rgba(5,5,5, 0.4);
+  background-color: rgba(5,5,5, 0.2);
   position: absolute;
   top: 0;
   left: 0;
@@ -316,11 +316,23 @@ h2.article-title {
 	border-radius: 50%;
 	color: #fff;
 }
+.remove-article {
+	cursor: pointer;
+  position: absolute;
+  right: 22px;
+  bottom: 16px;
+	font-size: 35px;
+  /*color: #00c7ff;*/
+ 	text-shadow: 1px 1px 5px #555;	
+}
 .icon.ion-ios-plus-outline{
 	color: #00c7ff;
 }
-.icon.ion-ios-minus-outline{
-	color: #ddd;
+.icon.ion-android-close{
+	color: #ccc;
+}
+.icon.ion-ios-checkmark-outline {
+	color: #ccc;
 }
 .play-article{
 	cursor: pointer;

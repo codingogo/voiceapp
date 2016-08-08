@@ -5,7 +5,7 @@ AppCtrl
     $scope.audioPlayer = false;
     $scope.playing = false; 
     $scope.state = { selected: undefined};
-    $scope.addState = { selected: undefined};    
+    $scope.addState = { selected: undefined};   
   }; 
 
   if ($stateParams.category != '' || $stateParams.category == undefined) {
@@ -15,7 +15,7 @@ AppCtrl
   }
 
   $scope.articles = Articles.all();
-  
+
   $ionicModal.fromTemplateUrl('templates/feed-player.html', {
     scope: $scope
   }).then(function(modal) {
@@ -28,41 +28,39 @@ AppCtrl
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
       $scope.audioPlayer = false;
-      // $rootScope.audioPlayer = false;
     }
   };
 
-  $scope.addArticle = function(article, idx) {
+  $scope.addArticle = function(article, idx, user) {
     $scope.addState.selected = ($scope.addState.selected != idx ? idx : undefined);
     if($scope.addState.selected !== idx){
       $scope.addLike = true;
     }
-  }
+    if(user.facebook){
+      var userId = user.facebook.id;
+    }
+    if(user.twitter){
+      var userId = user.twitter.id;
+    }
 
-  $scope.closePlayer = function() {
-    $scope.audioPlayer = false;
-    $scope.state = { selected: undefined};
+    Articles.addPlaylist(article, userId);
   }
 
   $scope.openPlayerLg = function(feed){
     $scope.modal.show(feed);
   };
 
-  $scope.test = function(){
-    alert('test');
-  }
-
   // bind stop button in view
   $scope.stopPlayback = function() {
-      MediaManager.stop();
-      
-      $scope.audioPlayer = false;
-      $scope.state = { selected: undefined};    
+    MediaManager.stop();
+    
+    $scope.audioPlayer = false;
+    $scope.state = { selected: undefined};    
   };
 
   // stop any track before leaving current view
   $scope.$on('$ionicView.beforeLeave', function() {
-      MediaManager.stop();
+    MediaManager.stop();
   });
 
   $scope.closePlayerModal = function() {
@@ -72,6 +70,11 @@ AppCtrl
   $scope.removeArticle = function(article) {
     $scope.addLike = true;
   }
+
+  $scope.closePlayer = function() {
+    $scope.audioPlayer = false;
+    $scope.state = { selected: undefined};
+  }  
 
   initialize();
 })
@@ -88,8 +91,4 @@ AppCtrl
   };
 
   initialize();
-})
-
-.controller('AudioplayerCtrl', function($scope, $stateParams, Articles){
-
 });
