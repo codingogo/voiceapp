@@ -1,4 +1,4 @@
-angular.module('odi', ['ionic','ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova', 'ionic-audio'])
+angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova', 'ionic-audio'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {

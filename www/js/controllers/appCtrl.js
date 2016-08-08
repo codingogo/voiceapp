@@ -37,7 +37,7 @@ var AppCtrl = angular.module('odi.controllers', [])
         console.log("Login Failed!", error);
         return;
       } else {
-        // console.log("Authenticated successfully with payload:", authData);
+        console.log("Authenticated successfully with payload:", authData);
         $scope.$apply(function() {
           $scope.user = authData;
           $rootScope.user = authData;

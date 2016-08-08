@@ -18,7 +18,7 @@ limitations under the License.
 angular.module('ionic-audio', ['ionic']);
 
 angular.module('ionic-audio').filter('time', function () {
-	var addLeadingZero = function(n) {
+    var addLeadingZero = function(n) {
         return (new Array(2).join('0')+n).slice(-2)
     };
 
@@ -348,7 +348,7 @@ function ionAudioProgressBar(MediaManager) {
             track: '=?'
         },
         template:
-            '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}}</h2>' +
+            '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}} - {{track.artist}}</h2>' +
             '<div class="range">' +
             '<ion-audio-progress track="track"></ion-audio-progress>' +
             '<input type="range" name="volume" min="0" max="{{track.duration}}" ng-model="track.progress" on-release="sliderRelease()" disabled>' +
@@ -424,8 +424,8 @@ function ionAudioPlay($ionicGesture, $timeout) {
 
         var init = function() {
             isLoading = false;
-            element.addClass('ion-ios-play-outline');
-            element.removeClass('ion-ios-pause-outline');
+            element.addClass('ion-play');
+            element.removeClass('ion-pause');
             element.text(attrs.textPlay);
         };
 
@@ -436,7 +436,7 @@ function ionAudioPlay($ionicGesture, $timeout) {
         };
 
         var togglePlaying = function() {
-            element.toggleClass('ion-ios-play-outline ion-ios-pause-outline');
+            element.toggleClass('ion-play ion-pause');
             setText();
         };
 
@@ -500,7 +500,7 @@ function ionAudioDuration() {
 angular.module('ionic-audio').directive('ionAudioControls', function() {
     return {
       restrict: 'EA',
-      require: ['ionAudioControls', '^^ionAudioTrack'],
+      require: ['ionAudioControls', '^ionAudioTrack'],
       controller: ['$scope', '$element', ionAudioControlsCtrl],
       link: link
     };
