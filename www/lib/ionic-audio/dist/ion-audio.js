@@ -500,7 +500,7 @@ function ionAudioDuration() {
 angular.module('ionic-audio').directive('ionAudioControls', function() {
     return {
       restrict: 'EA',
-      require: ['ionAudioControls', '^ionAudioTrack'],
+      require: ['ionAudioControls', '^^ionAudioTrack'],
       controller: ['$scope', '$element', ionAudioControlsCtrl],
       link: link
     };
