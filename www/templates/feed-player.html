@@ -10,7 +10,7 @@
 		  <h4 class="feed-modal-title">{{feed.title | limitTo:32}}{{feed.title.length > 32 ? '..':''}}</h4>
 		  <p class="feed-modal-subtitle">{{feed.source}}</p>
 		  
-			  <ion-audio-controls>
+			  <!-- <ion-audio-controls> -->
 			  	<div class="item range slider-duration">
 						<div class="item">
 				  		<ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
@@ -20,6 +20,6 @@
 					<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
 					<a href class="feed-modal-playbtn" ion-audio-play ng-click="test()">
 					</a>
-			  </ion-audio-controls>
+			  <!-- </ion-audio-controls> -->
 		</div>
 </ion-modal-view>
