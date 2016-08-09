@@ -31,10 +31,7 @@
         </ion-item>
         <ion-item menu-close href="#/app/playlists/{{''}}">
           <i class="icon ion-ios-pulse-strong menu-icon"></i> Feed
-        </ion-item>
-        <!-- <ion-item menu-close ui-sref="app.search">
-          <i class="icon ion-search menu-icon"></i> Search
-        </ion-item>  -->      
+        </ion-item>   
         <ion-item menu-close href ng-click="login()" ng-if="!user">
           <i class="icon ion-power menu-icon"></i> Login
         </ion-item>
@@ -51,10 +48,7 @@
       <ion-list class="menu-list">
         <ion-item menu-close href="#/app/savedlist" ng-if="user">
           <i class="icon ion-android-done menu-icon"></i> Saved
-        </ion-item> 
-        <!-- <ion-item menu-close ui-sref="app.setting">
-          <i class="icon ion-gear-a menu-icon"></i> Setting
-        </ion-item>  -->     
+        </ion-item>    
         <ion-item ng-click="logout()" menu-close href ng-if="user">
           <i class="icon ion-log-out menu-icon"></i> Logout
         </ion-item>      

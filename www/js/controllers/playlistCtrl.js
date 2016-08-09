@@ -36,13 +36,7 @@ AppCtrl
     if($scope.addState.selected !== idx){
       $scope.addLike = true;
     }
-    if(user.facebook){
-      var userId = user.facebook.id;
-    }
-    if(user.twitter){
-      var userId = user.twitter.id;
-    }
-
+    var userId = user.uid;
     Articles.addPlaylist(article, userId);
   }
 

@@ -40,14 +40,14 @@ var AppCtrl = angular.module('odi.controllers', [])
         console.log("Authenticated successfully with payload:", authData);
         $scope.$apply(function() {
           $scope.user = authData;
-          $rootScope.user = authData;
+          // $rootScope.user = authData;
           $scope.user.avatar = authData.facebook.profileImageURL;
           $scope.user.name = authData.facebook.displayName;
           $state.go('app.categories');
         });
 
         var user = {
-          id: authData.facebook.id,
+          id: authData.uid,
           name: authData.facebook.displayName,
           avatar: authData.facebook.profileImageURL,
           locale: authData.facebook.cachedUserProfile.locale,
@@ -56,7 +56,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'facebook '
         };
-        ref.child("users").child(authData.facebook.id).set(user);
+        ref.child("users").child(authData.uid).set(user);
       };
     });
     
@@ -75,14 +75,14 @@ var AppCtrl = angular.module('odi.controllers', [])
         console.log("Authenticated successfully with payload:", authData);
         $scope.$apply(function() {
           $scope.user = authData;
-          $rootScope.user = authData;
+          // $rootScope.user = authData;
           $scope.user.avatar = authData.twitter.profileImageURL;
           $scope.user.name = authData.twitter.displayName;
           $state.go('app.categories');
         });
 
         var user = {
-          id: authData.twitter.id,
+          id: authData.uid,
           name: authData.twitter.displayName,
           avatar: authData.twitter.profileImageURL,
           locale: authData.twitter.cachedUserProfile.location,
@@ -91,7 +91,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'twitter'
         };
-        ref.child("users").child(authData.twitter.id).set(user);        
+        ref.child("users").child(authData.uid).set(user);       
       }
     });
     

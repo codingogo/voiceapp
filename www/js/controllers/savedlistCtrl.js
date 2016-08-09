@@ -1,21 +1,22 @@
 AppCtrl
-.controller('SavedListCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager) {
+.controller('SavedListCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth) {
+
   var initialize = function() {
     $scope.audioPlayer = false;
     $scope.playing = false; 
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
   }; 
+  
+  var userId;
+  var ref = new Firebase('https://odi.firebaseio.com/myplaylist');
 
-  // query user's articles
-  if ($rootScope.user){
-    if($rootScope.user.facebook){
-      var userId = $rootScope.user.facebook.id;
-    }
-    if($rootScope.user.twitter){
-      var userId = $rootScope.user.twitter.id;
-    }
-    var ref = new Firebase('https://odi.firebaseio.com/myplaylist');
+  $scope.auth = Auth;
+  $scope.auth.$onAuth(function(authData) {
+    $scope.authData = authData;
+    console.log('authdata', $scope.authData);
+    userId = authData.uid;
+
     ref.child(userId).on('value', (snapshot) => {
       var playlistVal = snapshot.val();
       var playlist = _(playlistVal).keys().map((playlistKey) => {
@@ -26,7 +27,7 @@ AppCtrl
       .value();
       $scope.articles = playlist;
     })
-  }
+  });
 
   $scope.play = function(article, idx){
     $scope.audioPlayer = true;
