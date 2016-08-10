@@ -1,4 +1,4 @@
-AppCtrl
+angular.module('odi.controllers')
 .controller('CategoriesCtrl', function($scope) {
 
   $scope.setActive=function(category){

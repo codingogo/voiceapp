@@ -1,5 +1,5 @@
-AppCtrl
-.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager) {
+angular.module('odi.controllers')
+.controller('PlaylistsCtrl',['$scope', 'Articles', '$ionicModal', '$stateParams', '$rootScope', 'MediaManager', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager) {
   var initialize = function() {
     $scope.addLike = true;
     $scope.audioPlayer = false;
@@ -71,7 +71,7 @@ AppCtrl
   }  
 
   initialize();
-})
+}])
 
 
 .controller('PlaylistCtrl', function($scope, $stateParams, Articles) {

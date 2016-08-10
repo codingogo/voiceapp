@@ -4,5 +4,5 @@ AppService
     var ref = new Firebase("https://odi.firebaseio.com");
     return $firebaseAuth(ref);
   }
-])
+]);
 

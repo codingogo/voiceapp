@@ -46,10 +46,10 @@
     </ion-header-bar>
     <ion-content>
       <ion-list class="menu-list">
-        <ion-item menu-close href="#/app/savedlist" ng-if="user">
+        <ion-item menu-close ui-sref="app.mylist">
           <i class="icon ion-android-done menu-icon"></i> Saved
         </ion-item>    
-        <ion-item ng-click="logout()" menu-close href ng-if="user">
+        <ion-item ng-click="logout()" menu-close href>
           <i class="icon ion-log-out menu-icon"></i> Logout
         </ion-item>      
       </ion-list>

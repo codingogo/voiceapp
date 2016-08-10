@@ -55,6 +55,15 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
       }
     }
   })
+  .state('app.mylist', {
+    url: '/mylist',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/mylist.html',
+        controller: 'MylistCtrl'
+      }
+    }
+  })
 
   .state('app.single', {
     url: '/playlists/:articleId',
@@ -66,15 +75,6 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
     }
   })
 
-  .state('app.savedlist', {
-    url: '/savedlist',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/savedlist.html',
-        controller: 'SavedListCtrl'
-      }
-    }
-  })
 
   .state('app.setting', {
     url: '/setting',
