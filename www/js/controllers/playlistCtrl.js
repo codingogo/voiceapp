@@ -1,17 +1,46 @@
 angular.module('odi.controllers')
-.controller('PlaylistsCtrl',['$scope', 'Articles', '$ionicModal', '$stateParams', '$rootScope', 'MediaManager', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager) {
+.controller('PlaylistsCtrl', ['$scope', 'Articles', '$ionicModal', '$stateParams', '$rootScope', 'MediaManager', 'Auth','$firebaseArray','Myplaylist','FURL', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, $firebaseArray, Myplaylist, FURL) {
+
   var initialize = function() {
     $scope.addLike = true;
     $scope.audioPlayer = false;
     $scope.playing = false; 
     $scope.state = { selected: undefined};
-    $scope.addState = { selected: undefined};   
+    $scope.addState = { selected: undefined};  
   }; 
+
+  var userId;
+  $scope.auth = Auth;
+  $scope.auth.$onAuth(function(authData) {
+    console.clear();
+    $scope.userId = authData.uid;
+    return getPlaylist($scope.userId);
+  }) 
 
   if ($stateParams.category != '' || $stateParams.category == undefined) {
     $scope.categoryFilter = $stateParams.category;
   } else {
     $scope.categoryFilter = '';
+  }
+
+  var getPlaylist = function(userId) {
+    var ref = new Firebase(FURL);
+    var playlists = Myplaylist.all();
+    if (playlists.length > 0){
+      var playlistObj = playlists.filter(function(ob) { 
+        return ob["$id"]=== userId  })[0];
+
+      var playlistKeys = Object.keys(playlistObj)
+        .filter( function(x) {return (x!=="$id")})
+        .filter( function(x) {return (x!=="$priority")}); 
+
+      $scope.articles = $scope.articles.filter(function(ob){
+        var id = ob["$id"];
+        return( playlistKeys.indexOf(id)===-1 )
+      });   
+    } else {
+      return;
+    }
   }
 
   $scope.articles = Articles.all();
@@ -22,22 +51,25 @@ angular.module('odi.controllers')
     $scope.modal = modal;
   });
 
-  $scope.togglePlay = function(article, idx){
+  $scope.playTrack = function(article, idx){
     $scope.audioPlayer = true;
     $scope.feed = article;
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
-      $scope.audioPlayer = false;
+      return $scope.audioPlayer = false;
     }
   };
 
-  $scope.addArticle = function(article, idx, user) {
-    $scope.addState.selected = ($scope.addState.selected != idx ? idx : undefined);
-    if($scope.addState.selected !== idx){
-      $scope.addLike = true;
-    }
+  $scope.addTrack= function(article, idx, user) {   
     var userId = user.uid;
+    var articleId = article.$id;
     Articles.addPlaylist(article, userId);
+    var ref = new Firebase(FURL);
+    var playlistRef = ref.child('saved').child(userId).child(articleId);
+    playlistRef.on('value', function(snapshot){
+      return playlistRef.set(articleId);
+    });
+    return getPlaylist(userId);
   }
 
   $scope.openPlayerLg = function(feed){
@@ -46,10 +78,9 @@ angular.module('odi.controllers')
 
   // bind stop button in view
   $scope.stopPlayback = function() {
-    MediaManager.stop();
-    
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};    
+    MediaManager.stop();
   };
 
   // stop any track before leaving current view
@@ -61,9 +92,6 @@ angular.module('odi.controllers')
     $scope.modal.hide();
   };
 
-  $scope.removeArticle = function(article) {
-    $scope.addLike = true;
-  }
 
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
@@ -71,18 +99,4 @@ angular.module('odi.controllers')
   }  
 
   initialize();
-}])
-
-
-.controller('PlaylistCtrl', function($scope, $stateParams, Articles) {
-  var initialize = function() {
-    $scope.addLike = true;
-  };
-  $scope.article = Articles.get($stateParams.articleId);
-  $scope.article.shortTitle = Articles.get($stateParams.articleId).title.substring(0,18)+'...';
-  $scope.toggleLike = function(articleId) {
-    $scope.addLike = !$scope.addLike;
-  };
-
-  initialize();
-});
+}]);

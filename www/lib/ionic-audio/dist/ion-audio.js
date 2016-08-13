@@ -348,7 +348,6 @@ function ionAudioProgressBar(MediaManager) {
             track: '=?'
         },
         template:
-            '<h2 class="ion-audio-track-info" ng-style="displayTrackInfo()">{{track.title}} - {{track.artist}}</h2>' +
             '<div class="range">' +
             '<ion-audio-progress track="track"></ion-audio-progress>' +
             '<input type="range" name="volume" min="0" max="{{track.duration}}" ng-model="track.progress" on-release="sliderRelease()" disabled>' +
@@ -424,8 +423,8 @@ function ionAudioPlay($ionicGesture, $timeout) {
 
         var init = function() {
             isLoading = false;
-            element.addClass('ion-play');
-            element.removeClass('ion-pause');
+            element.addClass('ion-ios-play-outline');
+            element.removeClass('ion-ios-pause-outline');
             element.text(attrs.textPlay);
         };
 
@@ -436,7 +435,7 @@ function ionAudioPlay($ionicGesture, $timeout) {
         };
 
         var togglePlaying = function() {
-            element.toggleClass('ion-play ion-pause');
+            element.toggleClass('ion-ios-play-outline ion-ios-pause-outline');
             setText();
         };
 
@@ -505,7 +504,7 @@ angular.module('ionic-audio').directive('ionAudioControls', function() {
       link: link
     };
 
-function ionAudioControlsCtrl($scope, $element) {
+function ionAudioControlsCtrl($scope, $element, $timeout) {
         var spinnerElem = $element.find('ion-spinner'), hasLoaded, self = this;
 
         spinnerElem.addClass('ng-hide');
@@ -539,11 +538,15 @@ function ionAudioControlsCtrl($scope, $element) {
                   hasLoaded = false;
                   break;
             }
+
+            $timeout(function() {
+              hasLoaded = false;
+            }, 5000); 
         });
 
         $scope.$on('$destroy', function() {
           unbindStatusListener();
-        });
+        });   
     }
 
     function link(scope, element, attrs, controllers) {

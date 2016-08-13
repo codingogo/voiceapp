@@ -16,7 +16,7 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
     }
   });
 })
-
+.constant('FURL', 'https://odi.firebaseio.com/')
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -55,6 +55,7 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
       }
     }
   })
+  
   .state('app.mylist', {
     url: '/mylist',
     views: {
@@ -64,17 +65,6 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
       }
     }
   })
-
-  .state('app.single', {
-    url: '/playlists/:articleId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  })
-
 
   .state('app.setting', {
     url: '/setting',

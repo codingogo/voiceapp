@@ -1,5 +1,5 @@
 angular.module('odi.controllers')
-.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth) {
+.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, Myplaylist, FURL, $firebaseObject) {
   var initialize = function() {
     $scope.audioPlayer = false;
     $scope.playing = false; 
@@ -7,24 +7,24 @@ angular.module('odi.controllers')
     $scope.addState = { selected: undefined};  
     var userId;
   }; 
-  var ref = new Firebase('https://odi.firebaseio.com/myplaylist');
 
-  $scope.auth = Auth;
-  $scope.auth.$onAuth(function(authData) {
+  var ref = new Firebase(FURL);
+
+  Auth.$onAuth(function(authData) {
     $scope.authData = authData;
-    console.log('authdata', $scope.authData);
     userId = authData.uid;
 
-    ref.child(userId).on('value', function(snapshot) {
+    ref.child('myplaylist').child(userId).on('value', function(snapshot) {
       var playlistVal = snapshot.val();
       var playlist = _(playlistVal).keys().map(function(playlistKey) {
         var item = _.clone(playlistVal[playlistKey]);
         item.key = playlistKey;
-        return item
+        return item;
       })
       .value();
-      $scope.articles = playlist;
-      $scope.$apply();
+        $scope.articles = playlist;
+      $scope.$apply(function() {
+      });
     })
   });
 
@@ -39,7 +39,27 @@ angular.module('odi.controllers')
 
   $scope.removeArticle = function(article) {
     var articleId = article.key;
-    return ref.child(userId).child(articleId).set(null);
+    var myplaylistRef = ref.child('myplaylist').child(userId).child(articleId);
+    var myplaylistKey = myplaylistRef.key();
+    var savedRef = ref.child('saved').child(userId).child(article.id);
+    var savedKey = savedRef.key();   
+    savedRef.on('value', function(snapshot){
+      if(snapshot.val() != null){
+        savedRef.set(null);
+        myplaylistRef.set(null);
+      }
+    });
+//     console.log('userId', userId);
+//     console.log('articleId', articleId);
+//     console.log('article.id', article.id);
+//     console.log('savedKey', savedKey);
+//     console.log('myplaylistKey', myplaylistKey);
+// console.log('article', article);
+
+    // var updatePlaylist = {};
+    // updatePlaylist['saved/'+ userId+'/'+savedKey]=null;
+    // updatePlaylist['myplaylist/'+userId+'/'+myplaylistKey]=null;
+    // console.log('updatePlaylist', updatePlaylist);
   };
 
   $scope.openPlayerLg = function(feed){
@@ -48,14 +68,14 @@ angular.module('odi.controllers')
 
   // bind stop button in view
   $scope.stopPlayback = function() {
-    MediaManager.stop();
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};    
+    return MediaManager.stop();
   };
 
   // stop any track before leaving current view
   $scope.$on('$ionicView.beforeLeave', function() {
-    MediaManager.stop();
+    return MediaManager.stop();
   });  
 
   $scope.closePlayerModal = function() {

@@ -1,6 +1,6 @@
 var AppCtrl = angular.module('odi.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $rootScope, $ionicSideMenuDelegate, $state) {
+.controller('AppCtrl',['$scope', '$ionicModal', '$timeout', '$rootScope', '$ionicSideMenuDelegate', '$state', 'Articles', function($scope, $ionicModal, $timeout, $rootScope, $ionicSideMenuDelegate, $state, Articles) {
   $scope.user = false;
   // Form data for the login modal
   $scope.loginData = {};
@@ -20,7 +20,7 @@ var AppCtrl = angular.module('odi.controllers', [])
     $scope.modal.show();
   };
 
-  $scope.logout = function() {
+  $scope.logout = function() { 
     $scope.user = false;
     $rootScope.user = false;
     $ionicSideMenuDelegate.toggleRight(false); 
@@ -28,6 +28,8 @@ var AppCtrl = angular.module('odi.controllers', [])
     var ref = new Firebase('https://delb.firebaseio.com');
     ref.unauth();
     $state.go('app.categories'); 
+    localStorage.clear();
+    window.location.reload(true)
   };
 
   $scope.loginFacebook = function() {
@@ -56,7 +58,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'facebook '
         };
-        ref.child("users").child(authData.uid).set(user);
+        ref.child("users").child(authData.uid).update(user);
       };
     });
     
@@ -91,7 +93,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'twitter'
         };
-        ref.child("users").child(authData.uid).set(user);       
+        ref.child("users").child(authData.uid).update(user);       
       }
     });
     
@@ -100,7 +102,7 @@ var AppCtrl = angular.module('odi.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };  
-});
+}]);
 
 
 

@@ -5,8 +5,6 @@ var AppService = angular.module('odi.services', [])
   var myplaylistRef = ref.child("myplaylist");
   var articles = $firebaseArray(ref.child('feeds').orderByChild('timestamp'));
   var myplaylist = $firebaseArray(myplaylistRef.child('userId'));
-  // var obj = $firebaseObject(myplaylistRef);
-  
 
     return {
     all: function() {
@@ -36,7 +34,7 @@ var AppService = angular.module('odi.services', [])
         title: article.title,
         url: article.url
       };
-      myplaylistRef.child(userId).push(playlist);
+      return myplaylistRef.child(userId).push(playlist);
 
     }
   };
