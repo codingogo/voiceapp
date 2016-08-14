@@ -22,9 +22,9 @@ angular.module('odi.controllers')
   } else {
     $scope.categoryFilter = '';
   }
+  var ref = new Firebase(FURL);
 
   var getPlaylist = function(userId) {
-    var ref = new Firebase(FURL);
     var playlists = Myplaylist.all();
     if (playlists.length > 0){
       var playlistObj = playlists.filter(function(ob) { 
@@ -61,14 +61,13 @@ angular.module('odi.controllers')
   };
 
   $scope.addTrack= function(article, idx, user) {   
+    $scope.audioPlayer = false;
+    $scope.feed = null;
     var userId = user.uid;
     var articleId = article.$id;
     Articles.addPlaylist(article, userId);
-    var ref = new Firebase(FURL);
     var playlistRef = ref.child('saved').child(userId).child(articleId);
-    playlistRef.on('value', function(snapshot){
-      return playlistRef.set(articleId);
-    });
+    playlistRef.set(true);
     return getPlaylist(userId);
   }
 

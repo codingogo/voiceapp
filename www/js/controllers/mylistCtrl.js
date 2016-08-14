@@ -23,8 +23,6 @@ angular.module('odi.controllers')
       })
       .value();
         $scope.articles = playlist;
-      $scope.$apply(function() {
-      });
     })
   });
 
@@ -45,8 +43,16 @@ angular.module('odi.controllers')
     var savedKey = savedRef.key();   
     savedRef.on('value', function(snapshot){
       if(snapshot.val() != null){
-        savedRef.set(null);
-        myplaylistRef.set(null);
+        setTimeout(function(){
+          savedRef.set(null, function(err){
+            if(err){
+              console.log('delete err', err);
+            }
+          });
+        }, 300);
+        setTimeout(function() {
+          myplaylistRef.set(null);
+        }, 300);
       }
     });
 //     console.log('userId', userId);

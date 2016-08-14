@@ -58,7 +58,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'facebook '
         };
-        ref.child("users").child(authData.uid).update(user);
+        return ref.child("users").child(authData.uid).update(user);
       };
     });
     
@@ -93,7 +93,7 @@ var AppCtrl = angular.module('odi.controllers', [])
           timestamp: Firebase.ServerValue.TIMESTAMP,
           source: 'twitter'
         };
-        ref.child("users").child(authData.uid).update(user);       
+        return ref.child("users").child(authData.uid).update(user);       
       }
     });
     

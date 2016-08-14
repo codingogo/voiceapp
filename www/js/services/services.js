@@ -35,7 +35,6 @@ var AppService = angular.module('odi.services', [])
         url: article.url
       };
       return myplaylistRef.child(userId).push(playlist);
-
     }
   };
 });
