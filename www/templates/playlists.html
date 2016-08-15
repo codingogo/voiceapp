@@ -1,18 +1,18 @@
 <ion-view view-title="FEED">
   <ion-content>
     <ion-list>
-	    <ion-audio-track class="item item-article article-list-item" ng-repeat="article in articles | filter:categoryFilter" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
+	    <ion-audio-track class="item item-article article-list-item" ng-repeat="track in articles | filter:categoryFilter" style="background-image:url({{track.image}}); background-size:cover; background-position:center" track="track">
 	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
-				      <h2 class="article-title">{{article.title | limitTo:23}}{{article.title.length > 23 ? '..' : ''}}</h2>
-							<p class="article-source">{{article.source}}</p>
+				      <h2 class="article-title">{{track.title | limitTo:23}}{{track.title.length > 23 ? '..' : ''}}</h2>
+							<p class="article-source">{{track.source}}</p>
 						</div>	
 					</a>
 					<ion-spinner icon="lines"></ion-spinner>
 					
 					<!-- disabled click during track load -->
-					<a ion-audio-play ng-click="playTrack(article, $index)" class="play-article">
+					<a ion-audio-play ng-click="playTrack(track, $index)" class="play-article">
 					</a>	
 				
 					<!-- no user -->
@@ -24,7 +24,7 @@
 					<!-- user && has saved to playlist -->
 					<a class="add-article" 
 						 ng-show="user"
-						 ng-click="addTrack(article, $index, user)">
+						 ng-click="addTrack(track, $index, user)">
 						<span>
 							<i class="icon ion-ios-plus-outline"></i>
 						</span>

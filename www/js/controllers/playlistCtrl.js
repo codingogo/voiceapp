@@ -7,12 +7,13 @@ angular.module('odi.controllers')
     $scope.playing = false; 
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
+    // $scope.isLoading = false;
   }; 
 
   var userId;
   $scope.auth = Auth;
   $scope.auth.$onAuth(function(authData) {
-    console.clear();
+    // console.clear();
     $scope.userId = authData.uid;
     return getPlaylist($scope.userId);
   }) 
@@ -28,23 +29,25 @@ angular.module('odi.controllers')
   var ref = new Firebase(FURL);
 
   var getPlaylist = function(userId) {
-    var obj = $firebaseObject(ref.child('saved'));
-    obj.$loaded().then(function(){
-      var savedListKeysArr = Object.keys(obj[userId]);
+    var savedObj = $firebaseObject(ref.child('saved'));
+    savedObj.$loaded().then(function(){
+      var savedKeysArr = Object.keys(savedObj[userId]);
       $scope.articles = $scope.articles.filter(function(ob){
         var id = ob["$id"];
-        return(savedListKeysArr.indexOf(id)===-1);
+        return(savedKeysArr.indexOf(id)===-1);
       });
     })
   }
 
-  $scope.playTrack = function(article, idx){
+  $scope.playTrack = function(track, idx){
     $scope.audioPlayer = true;
-    $scope.feed = article;
+    $scope.feed = track;
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
       return $scope.audioPlayer = false;
-    }
+    };
+
+    // $scope.togglePlayback = !$scope.togglePlayback;
   };
 
   $scope.addTrack= function(article, idx, user) {  

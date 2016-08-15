@@ -24,10 +24,10 @@ var AppCtrl = angular.module('odi.controllers', [])
     $scope.user = false;
     $rootScope.user = false;
     $ionicSideMenuDelegate.toggleRight(false); 
+    $state.go('app.categories'); 
     
     var ref = new Firebase('https://delb.firebaseio.com');
     ref.unauth();
-    $state.go('app.categories'); 
     localStorage.clear();
     window.location.reload(true)
   };

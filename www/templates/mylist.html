@@ -1,20 +1,20 @@
-<ion-view view-title="PLAYLIST">
+<ion-view view-title="SAVED PLAYLIST">
   <ion-content>
     <ion-list>
-	    <ion-audio-track class="item item-article" ng-repeat="article in articles | filter:categoryFilter" style="background-image:url({{article.image}}); background-size:cover; background-position:center" track="article">
+	    <ion-audio-track class="item item-article" ng-repeat="track in articles | filter:categoryFilter" style="background-image:url({{track.image}}); background-size:cover; background-position:center" track="track">
 	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
-				      <h2 class="article-title">{{article.title | limitTo:23}}{{article.title.length > 23 ? '..' : ''}}</h2>
-							<p class="article-source">{{article.source}}</p>
+				      <h2 class="article-title">{{track.title | limitTo:23}}{{track.title.length > 23 ? '..' : ''}}</h2>
+							<p class="article-source">{{track.source}}</p>
 						</div>	
 					</a>
 					<ion-spinner icon="lines"></ion-spinner>
 					
-					<a ion-audio-play ng-click="play(article, $index)" class="play-article">
+					<a ion-audio-play ng-click="play(track, $index)" class="play-article">
 					</a>	
 				
-					<a class="remove-article" ng-click="removeArticle(article)">
+					<a class="remove-article" ng-click="removeArticle(track)">
 						<span><i class="icon ion-ios-minus-outline"></i></span>
 					</a>
 				</ion-audio-controls>

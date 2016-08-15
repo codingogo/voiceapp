@@ -147,8 +147,7 @@ angular.module('ionic-audio').factory('MediaManager', ['$interval', '$timeout', 
 
 
     function playTrack(track) {
-        currentTrack = track;
-
+        currentTrack = track;       
         console.log('ionic-audio: playing track ' + currentTrack.title);
 
         currentMedia = createMedia(currentTrack);
@@ -305,6 +304,7 @@ function ionAudioTrack(MediaManager, $rootScope) {
         };
 
         this.start = function() {
+            console.log('ionicAudioTrack this.start test!!!!');
             if (!$scope.track || !$scope.track.url) return;
 
             MediaManager.play($scope.track.id);
@@ -514,6 +514,7 @@ function ionAudioControlsCtrl($scope, $element, $timeout) {
         };
 
         this.play = function() {
+            console.log('1test!!!!');
           if (!hasLoaded) {
               self.toggleSpinner();
           }

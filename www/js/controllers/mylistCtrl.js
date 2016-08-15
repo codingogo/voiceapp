@@ -1,5 +1,6 @@
 angular.module('odi.controllers')
-.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, Myplaylist, FURL, $firebaseObject) {
+.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, FURL, $firebaseObject) {
+
   var initialize = function() {
     $scope.audioPlayer = false;
     $scope.playing = false; 
@@ -7,8 +8,8 @@ angular.module('odi.controllers')
     $scope.addState = { selected: undefined};  
   }; 
   var userId;
-
   var ref = new Firebase(FURL);
+
   $scope.auth = Auth;
   $scope.auth.$onAuth(function(authData) {
     $scope.authData = authData;
@@ -22,13 +23,13 @@ angular.module('odi.controllers')
         return item;
       })
       .value();
-        $scope.articles = playlist;
+      $scope.articles = playlist.reverse();
     })
   });
 
-  $scope.play = function(article, idx){
+  $scope.play = function(track, idx){
     $scope.audioPlayer = true;
-    $scope.feed = article;
+    $scope.feed = track;
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
       $scope.audioPlayer = false;
@@ -43,8 +44,14 @@ angular.module('odi.controllers')
     savedRef.set(null);
   };
 
+  $ionicModal.fromTemplateUrl('templates/feed-player.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
   $scope.openPlayerLg = function(feed){
-    return $scope.modal.show(feed);
+    $scope.modal.show(feed);
   };  
 
   // bind stop button in view
