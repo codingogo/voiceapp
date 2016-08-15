@@ -1,5 +1,5 @@
 angular.module('odi.controllers')
-.controller('PlaylistsCtrl', ['$scope', 'Articles', '$ionicModal', '$stateParams', '$rootScope', 'MediaManager', 'Auth','$firebaseArray','Myplaylist','FURL', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, $firebaseArray, Myplaylist, FURL) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, $firebaseArray, FURL, $firebaseObject) {
 
   var initialize = function() {
     $scope.addLike = true;
@@ -22,34 +22,21 @@ angular.module('odi.controllers')
   } else {
     $scope.categoryFilter = '';
   }
+
+  $scope.articles = Articles.all();  
+
   var ref = new Firebase(FURL);
 
   var getPlaylist = function(userId) {
-    var playlists = Myplaylist.all();
-    if (playlists.length > 0){
-      var playlistObj = playlists.filter(function(ob) { 
-        return ob["$id"]=== userId  })[0];
-
-      var playlistKeys = Object.keys(playlistObj)
-        .filter( function(x) {return (x!=="$id")})
-        .filter( function(x) {return (x!=="$priority")}); 
-
+    var obj = $firebaseObject(ref.child('saved'));
+    obj.$loaded().then(function(){
+      var savedListKeysArr = Object.keys(obj[userId]);
       $scope.articles = $scope.articles.filter(function(ob){
         var id = ob["$id"];
-        return( playlistKeys.indexOf(id)===-1 )
-      });   
-    } else {
-      return;
-    }
+        return(savedListKeysArr.indexOf(id)===-1);
+      });
+    })
   }
-
-  $scope.articles = Articles.all();
-
-  $ionicModal.fromTemplateUrl('templates/feed-player.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
 
   $scope.playTrack = function(article, idx){
     $scope.audioPlayer = true;
@@ -60,7 +47,7 @@ angular.module('odi.controllers')
     }
   };
 
-  $scope.addTrack= function(article, idx, user) {   
+  $scope.addTrack= function(article, idx, user) {  
     $scope.audioPlayer = false;
     $scope.feed = null;
     var userId = user.uid;
@@ -70,6 +57,12 @@ angular.module('odi.controllers')
     playlistRef.set(true);
     return getPlaylist(userId);
   }
+
+  $ionicModal.fromTemplateUrl('templates/feed-player.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
 
   $scope.openPlayerLg = function(feed){
     $scope.modal.show(feed);
@@ -91,11 +84,10 @@ angular.module('odi.controllers')
     $scope.modal.hide();
   };
 
-
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};
   }  
 
   initialize();
-}]);
+});

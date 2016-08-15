@@ -1,4 +1,14 @@
-angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.services', 'firebase', 'ngCordova', 'ionic-audio'])
+angular.module('odi', 
+  [
+    'ionic', 
+    'ionic.service.core', 
+    'odi.controllers', 
+    'odi.services', 
+    'firebase', 
+    'ngCordova', 
+    'ionic-audio', 
+    'ngAnimate'
+  ])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
@@ -16,7 +26,9 @@ angular.module('odi', ['ionic', 'ionic.service.core', 'odi.controllers', 'odi.se
     }
   });
 })
+
 .constant('FURL', 'https://odi.firebaseio.com/')
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 

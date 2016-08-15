@@ -24,6 +24,7 @@ var AppService = angular.module('odi.services', [])
     addPlaylist: function(article, userId){
       var playlist = {
         id: article.$id,
+        rid: article.$id,
         author: article.author,
         category: article.category,
         description: article.description,

@@ -538,10 +538,6 @@ function ionAudioControlsCtrl($scope, $element, $timeout) {
                   hasLoaded = false;
                   break;
             }
-
-            $timeout(function() {
-              hasLoaded = false;
-            }, 5000); 
         });
 
         $scope.$on('$destroy', function() {

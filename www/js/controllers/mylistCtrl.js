@@ -5,12 +5,12 @@ angular.module('odi.controllers')
     $scope.playing = false; 
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
-    var userId;
   }; 
+  var userId;
 
   var ref = new Firebase(FURL);
-
-  Auth.$onAuth(function(authData) {
+  $scope.auth = Auth;
+  $scope.auth.$onAuth(function(authData) {
     $scope.authData = authData;
     userId = authData.uid;
 
@@ -38,34 +38,9 @@ angular.module('odi.controllers')
   $scope.removeArticle = function(article) {
     var articleId = article.key;
     var myplaylistRef = ref.child('myplaylist').child(userId).child(articleId);
-    var myplaylistKey = myplaylistRef.key();
-    var savedRef = ref.child('saved').child(userId).child(article.id);
-    var savedKey = savedRef.key();   
-    savedRef.on('value', function(snapshot){
-      if(snapshot.val() != null){
-        setTimeout(function(){
-          savedRef.set(null, function(err){
-            if(err){
-              console.log('delete err', err);
-            }
-          });
-        }, 300);
-        setTimeout(function() {
-          myplaylistRef.set(null);
-        }, 300);
-      }
-    });
-//     console.log('userId', userId);
-//     console.log('articleId', articleId);
-//     console.log('article.id', article.id);
-//     console.log('savedKey', savedKey);
-//     console.log('myplaylistKey', myplaylistKey);
-// console.log('article', article);
-
-    // var updatePlaylist = {};
-    // updatePlaylist['saved/'+ userId+'/'+savedKey]=null;
-    // updatePlaylist['myplaylist/'+userId+'/'+myplaylistKey]=null;
-    // console.log('updatePlaylist', updatePlaylist);
+    var savedRef = ref.child('saved').child(userId).child(article.rid);
+    myplaylistRef.set(null); 
+    savedRef.set(null);
   };
 
   $scope.openPlayerLg = function(feed){

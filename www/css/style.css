@@ -309,10 +309,9 @@ h2.article-title {
   right: 22px;
   bottom: 16px;
 	font-size: 35px;
-  /*color: #00c7ff;*/
  	text-shadow: 1px 1px 5px #555;
 }
-.add-article:active{
+.add-article:active .ion-ios-plus-outline, .add-article:hover .ion-ios-plus-outline{
 	border-radius: 50%;
 	color: #fff;
 }
