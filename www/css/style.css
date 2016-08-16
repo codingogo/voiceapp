@@ -199,12 +199,14 @@ a.item-content.activated, a.item-content:focus{
 	margin: 0;
 }
 .feed-modal-content{
+	position: absolute;
   color: #fff;
   padding-top: 270px;
   text-align: center;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 20px;	
+  width: 100%;
 }
 .bar-modal {
 	padding: 0;
@@ -222,20 +224,23 @@ a.item-content.activated, a.item-content:focus{
 	height: 295px;
 }
 .feed-modal-title{
-	padding-bottom: 5px;
+	padding-bottom: 0px;
+	margin-bottom: 5px;
 }
 .feed-modal-subtitle{
 	color: #ffe100;
+	margin-bottom: 15px;
 }
 .feed-modal-author{
-	padding-top: 10px;
+	padding-top: 15px;
+	margin-bottom: 5px;
 }
 .icon-play-circle{
 	font-size: 80px;
 }
 .feed-modal-playbtn{
 	font-size: 120px;
-	margin-top: 20px;
+	margin-top: 0px;
   position: relative;
   display: inline-block;
 }
@@ -255,6 +260,9 @@ button.player-close:focus, button.player-close:active{
 }
 .range input {
 	min-width: 188px;
+}
+.audio-progress {
+	min-width: 80px;  
 }
 /******** ARTICLE PAGE ***********/
 .playlists-img{

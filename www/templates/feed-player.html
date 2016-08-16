@@ -1,22 +1,21 @@
 <ion-modal-view>
   <ion-header-bar class="bar-modal">
-    <div style="background-image:url({{feed.image}});background-size: cover;background-position:center; background-repeat: none;" class="feed-modal-img">
-		<button class="button button-clear player-close" ng-click="closePlayerModal()"><i class="ion ion-ios-arrow-left player-close"></i></button>
+    <span style="background-image:url({{feed.image}});background-size: cover;background-position:center; background-repeat: none;" class="feed-modal-img">
+			<button class="button button-clear player-close" ng-click="closePlayerModal()"><i class="ion ion-ios-arrow-down player-close"></i></button>
+		</span>
   </ion-header-bar>
   <ion-content class="feed-modal-split">
-  </ion-content>
-
-	  <div class="feed-modal-content">
-		  <h4 class="feed-modal-title">{{feed.title | limitTo:32}}{{feed.title.length > 32 ? '..':''}}</h4>
+	  <ion-audio-track class="feed-modal-content">
+		  <h4 class="feed-modal-title">{{feed.title | limitTo:42}}{{feed.title.length > 42 ? '..':''}}</h4>
 		  <p class="feed-modal-subtitle">{{feed.source}}</p>
-	  	<div class="item range slider-duration">
-				<div class="item">
-		  		<ion-audio-progress-bar track="myTrack" display-time></ion-audio-progress-bar>
-		  	</div>	
-			</div>
-			<p class="feed-modal-author">Author: {{feed.author}}</p>
-			<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
-			<a href class="feed-modal-playbtn">
-			</a>
-		</div>
+				<ion-audio-controls>
+		  		<ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
+					<p class="feed-modal-author">Author: {{feed.author}}</p>
+					<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
+					<a href class="feed-modal-playbtn" ng-click="stopPlayback()">
+						<span ion-audio-play></i></span>
+					</a>
+		  	</ion-audio-controls>
+		</ion-audio-track>
+  </ion-content>
 </ion-modal-view>

@@ -304,7 +304,6 @@ function ionAudioTrack(MediaManager, $rootScope) {
         };
 
         this.start = function() {
-            console.log('ionicAudioTrack this.start test!!!!');
             if (!$scope.track || !$scope.track.url) return;
 
             MediaManager.play($scope.track.id);
@@ -514,7 +513,6 @@ function ionAudioControlsCtrl($scope, $element, $timeout) {
         };
 
         this.play = function() {
-            console.log('1test!!!!');
           if (!hasLoaded) {
               self.toggleSpinner();
           }

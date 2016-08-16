@@ -7,6 +7,7 @@ angular.module('odi.controllers')
     $scope.playing = false; 
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
+    $scope.modalOpen = false;
     // $scope.isLoading = false;
   }; 
 
@@ -65,10 +66,12 @@ angular.module('odi.controllers')
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
+    console.log('scope', $scope);
   });
 
   $scope.openPlayerLg = function(feed){
     $scope.modal.show(feed);
+    console.log('$scope', $scope);
   };
 
   // bind stop button in view
