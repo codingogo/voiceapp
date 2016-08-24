@@ -9,10 +9,10 @@
 							<p class="article-source">{{track.source}}</p>
 						</div>	
 					</a>
-					<ion-spinner icon="lines"></ion-spinner>
+					<ion-spinner icon="ripple"></ion-spinner>
 					<div class="overlay" ng-if="isLoading"></div>
 					
-					<a ion-audio-play ng-click="play(track, $index)" class="play-article">
+					<a ng-click="play(track, $index)" class="play-article" ion-audio-play>
 					</a>	
 				
 					<a class="remove-article" ng-click="removeArticle(track, $index)">

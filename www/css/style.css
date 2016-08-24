@@ -362,7 +362,7 @@ h2.article-title {
 	color: #ffe100;
 	text-shadow: 1px 1px 5px #555;
 }
-.spinner-lines svg{
+.spinner-ripple svg{
   stroke: #ffe100;
   fill: #ffe100;
   font-size: 60px;

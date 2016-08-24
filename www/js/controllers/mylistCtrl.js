@@ -1,11 +1,12 @@
 angular.module('odi.controllers')
-.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, FURL, $firebaseObject) {
+.controller('MylistCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, FURL, $firebaseObject, $interval, $timeout) {
 
   var initialize = function() {
     $scope.audioPlayer = false;
     $scope.playing = false; 
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
+    $scope.modalOpen = false;
   }; 
   var userId;
   var ref = new Firebase(FURL);
@@ -32,7 +33,7 @@ angular.module('odi.controllers')
     $scope.feed = track;
     $scope.state.selected = ($scope.state.selected != idx ? idx : undefined);
     if($scope.state.selected !== idx){
-      $scope.audioPlayer = false;
+      return $scope.audioPlayer = false;
     };
   };  
 
@@ -61,16 +62,38 @@ angular.module('odi.controllers')
     MediaManager.stop();
   };
 
-  $scope.pausePlay = function() {
-    $scope.isPlaying = !$scope.isPlaying;
-    MediaManager.pause();
-  };
+  var runDynamicTrack;
+  $scope.pausePlay = function(feed) {
+    $scope.track = {};
+    if($scope.isPlaying){
+      MediaManager.pause();
+      $scope.isPlaying = false;
+    } else {
+      var dynamicTrack = $rootScope.currentMediaTrack;
+      dynamicTrack.play();
+      var duration = dynamicTrack.getDuration();
+      runDynamicTrack = $interval(function() {
+        dynamicTrack.getCurrentPosition(
+          function (position) {
+            if (position > -1) {
+              $scope.dynamicTrack.progress = position;
+              $rootScope.$broadcast('ionic-audio:trackChange', $scope.dynamicTrack);
+            }
+          },
+          function (e) {
+            console.log("Error getting pos=" + e);
+          }
+        );
+      }, 1000);  
 
-  $scope.resumePlay = function(feed) {
-    $scope.isPlaying = !$scope.isPlaying;
-    $scope.feed = feed;
-    $scope.togglePlayback = $scope.togglePlayback;
-  }
+      $timeout(function() {
+        $scope.dynamicTrack.duration = duration;
+      }, 300);
+
+      $scope.dynamicTrack = dynamicTrack;
+      $scope.isPlaying = true;
+    }
+  };
 
   // stop any track before leaving current view
   $scope.$on('$ionicView.beforeLeave', function() {
@@ -78,10 +101,13 @@ angular.module('odi.controllers')
   });
 
   $scope.closePlayerModal = function() {
+    MediaManager.stop();
     $scope.modal.hide();
     $scope.audioPlayer = false;
-    $scope.state = { selected: undefined};
-    MediaManager.stop();
+    $scope.feed = {};
+    $scope.dynamicTrack = null;
+    $scope.isPlaying = false;
+    $scope.$on('$destroy', function(){$interval.cancel(runDynamicTrack);});
   };
 
   $scope.closePlayer = function() {
