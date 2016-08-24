@@ -23,7 +23,7 @@ angular.module('odi.controllers')
         return item;
       })
       .value();
-      $scope.articles = playlist.reverse();
+      return $scope.articles = playlist.reverse();
     })
   });
 
@@ -36,7 +36,7 @@ angular.module('odi.controllers')
     };
   };  
 
-  $scope.removeArticle = function(article) {
+  $scope.removeArticle = function(article, index) {
     var articleId = article.key;
     var myplaylistRef = ref.child('myplaylist').child(userId).child(articleId);
     var savedRef = ref.child('saved').child(userId).child(article.rid);
@@ -51,29 +51,43 @@ angular.module('odi.controllers')
   });
 
   $scope.openPlayerLg = function(feed){
+    $scope.isPlaying = true;
     $scope.modal.show(feed);
-  };  
+  };
 
-  // bind stop button in view
   $scope.stopPlayback = function() {
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};    
-    return MediaManager.stop();
+    MediaManager.stop();
   };
+
+  $scope.pausePlay = function() {
+    $scope.isPlaying = !$scope.isPlaying;
+    MediaManager.pause();
+  };
+
+  $scope.resumePlay = function(feed) {
+    $scope.isPlaying = !$scope.isPlaying;
+    $scope.feed = feed;
+    $scope.togglePlayback = $scope.togglePlayback;
+  }
 
   // stop any track before leaving current view
   $scope.$on('$ionicView.beforeLeave', function() {
-    return MediaManager.stop();
-  });  
+    MediaManager.stop();
+  });
 
   $scope.closePlayerModal = function() {
     $scope.modal.hide();
+    $scope.audioPlayer = false;
+    $scope.state = { selected: undefined};
+    MediaManager.stop();
   };
 
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};
-  };  
+  }; 
 
   initialize();  
 });

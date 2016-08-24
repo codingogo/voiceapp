@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.voiceapp555887" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>voiceapp</name>
+  <name>Odi</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Reading with ears.
     </description>
   <author email="contact@odireader.co" href="http://odireader.co/">
-      Your Name Here
+      Odi
     </author>
   <content src="index.html"/>
   <access origin="*"/>

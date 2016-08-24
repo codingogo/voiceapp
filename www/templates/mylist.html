@@ -1,32 +1,35 @@
-<ion-view view-title="SAVED PLAYLIST">
+<ion-view view-title="SAVED FEED">
   <ion-content>
     <ion-list>
 	    <ion-audio-track class="item item-article" ng-repeat="track in articles | filter:categoryFilter" style="background-image:url({{track.image}}); background-size:cover; background-position:center" track="track">
 	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
-				      <h2 class="article-title">{{track.title | limitTo:23}}{{track.title.length > 23 ? '..' : ''}}</h2>
+				      <h2 class="article-title">{{track.title | limitTo:26}}{{track.title.length > 26 ? '..' : ''}}</h2>
 							<p class="article-source">{{track.source}}</p>
 						</div>	
 					</a>
 					<ion-spinner icon="lines"></ion-spinner>
+					<div class="overlay" ng-if="isLoading"></div>
 					
 					<a ion-audio-play ng-click="play(track, $index)" class="play-article">
 					</a>	
 				
-					<a class="remove-article" ng-click="removeArticle(track)">
+					<a class="remove-article" ng-click="removeArticle(track, $index)">
 						<span><i class="icon ion-ios-minus-outline"></i></span>
 					</a>
 				</ion-audio-controls>
 	    </ion-audio-track>
     </ion-list>
   </ion-content>
+
 	<div class="audio-player" ng-if="audioPlayer">
   	<div class="">
 		  <button class="player-expand-arrow" ng-click="openPlayerLg({{feed}})"><i class="icon ion-ios-arrow-up"></i></button>
-		  <div class="feed-title">{{feed.title | limitTo:28}}{{feed.title.length >28?'..':''}}</div><br>
+		  <div class="feed-title">{{feed.title | limitTo:30}}{{feed.title.length >30?'..':''}}</div><br>
 		  <div class="feed-source">{{feed.source}}</div>
-		  <button class="pause-btn" ng-click="stopPlayback()"><i class="icon ion-ios-pause"></i></button>
+		  <a class="pause-btn" ng-click="stopPlayback()" ng-hid="isLoading"><i class="icon ion-ios-close-outline"></i></a>
+			<a class="pause-btn" ng-show="isLoading" style="color:grey"><i class="icon ion-ios-close-outline"></i></a>
 		</div>
   </div>
 </ion-view>

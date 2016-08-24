@@ -1,5 +1,5 @@
 angular.module('odi.controllers')
-.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, $firebaseArray, FURL, $firebaseObject) {
+.controller('PlaylistsCtrl', function($scope, Articles, $ionicModal, $stateParams, $rootScope, MediaManager, Auth, $firebaseArray, FURL, $firebaseObject, $interval, $timeout) {
 
   var initialize = function() {
     $scope.addLike = true;
@@ -8,14 +8,15 @@ angular.module('odi.controllers')
     $scope.state = { selected: undefined};
     $scope.addState = { selected: undefined};  
     $scope.modalOpen = false;
-    // $scope.isLoading = false;
   }; 
 
   var userId;
   $scope.auth = Auth;
   $scope.auth.$onAuth(function(authData) {
     // console.clear();
-    $scope.userId = authData.uid;
+    if(authData != null){
+      $scope.userId = authData.uid;
+    };
     return getPlaylist($scope.userId);
   }) 
 
@@ -29,15 +30,19 @@ angular.module('odi.controllers')
 
   var ref = new Firebase(FURL);
 
-  var getPlaylist = function(userId) {
-    var savedObj = $firebaseObject(ref.child('saved'));
-    savedObj.$loaded().then(function(){
-      var savedKeysArr = Object.keys(savedObj[userId]);
-      $scope.articles = $scope.articles.filter(function(ob){
-        var id = ob["$id"];
-        return(savedKeysArr.indexOf(id)===-1);
-      });
-    })
+  var getPlaylist = function(user_id) {
+    if (user_id != undefined){
+      var savedObj = $firebaseObject(ref.child('saved'));
+      savedObj.$loaded().then(function(){
+        var savedKeysArr = Object.keys(savedObj[user_id]);
+        $scope.articles = $scope.articles.filter(function(ob){
+          var id = ob["$id"];
+          return(savedKeysArr.indexOf(id)===-1);
+        });
+      })
+    } else {
+      $scope.articles = Articles.all();
+    }
   }
 
   $scope.playTrack = function(track, idx){
@@ -47,13 +52,11 @@ angular.module('odi.controllers')
     if($scope.state.selected !== idx){
       return $scope.audioPlayer = false;
     };
-
-    // $scope.togglePlayback = !$scope.togglePlayback;
   };
 
   $scope.addTrack= function(article, idx, user) {  
     $scope.audioPlayer = false;
-    $scope.feed = null;
+    $scope.feed = {};
     var userId = user.uid;
     var articleId = article.$id;
     Articles.addPlaylist(article, userId);
@@ -66,19 +69,51 @@ angular.module('odi.controllers')
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
-    console.log('scope', $scope);
   });
 
   $scope.openPlayerLg = function(feed){
+    $scope.isPlaying = true;
     $scope.modal.show(feed);
-    console.log('$scope', $scope);
   };
 
-  // bind stop button in view
   $scope.stopPlayback = function() {
     $scope.audioPlayer = false;
-    $scope.state = { selected: undefined};    
     MediaManager.stop();
+    $scope.feed = {};
+    getPlaylist();
+  };
+
+  var runDynamicTrack;
+  $scope.pausePlay = function(feed) {
+    $scope.track = {};
+    if($scope.isPlaying){
+      MediaManager.pause();
+      $scope.isPlaying = false;
+    } else {
+      var dynamicTrack = $rootScope.currentMediaTrack;
+      dynamicTrack.play();
+      var duration = dynamicTrack.getDuration();
+      runDynamicTrack = $interval(function() {
+        dynamicTrack.getCurrentPosition(
+          function (position) {
+            if (position > -1) {
+              $scope.dynamicTrack.progress = position;
+              $rootScope.$broadcast('ionic-audio:trackChange', $scope.dynamicTrack);
+            }
+          },
+          function (e) {
+            console.log("Error getting pos=" + e);
+          }
+        );
+      }, 1000);  
+
+      $timeout(function() {
+        $scope.dynamicTrack.duration = duration;
+      }, 300);
+
+      $scope.dynamicTrack = dynamicTrack;
+      $scope.isPlaying = true;
+    }
   };
 
   // stop any track before leaving current view
@@ -87,13 +122,19 @@ angular.module('odi.controllers')
   });
 
   $scope.closePlayerModal = function() {
+    MediaManager.stop();
     $scope.modal.hide();
+    $scope.audioPlayer = false;
+    $scope.feed = {};
+    $scope.dynamicTrack = null;
+    $scope.isPlaying = false;
+    $scope.$on('$destroy', function(){$interval.cancel(runDynamicTrack);});
   };
 
   $scope.closePlayer = function() {
     $scope.audioPlayer = false;
     $scope.state = { selected: undefined};
-  }  
+  };  
 
   initialize();
 });

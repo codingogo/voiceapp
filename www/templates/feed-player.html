@@ -6,16 +6,22 @@
   </ion-header-bar>
   <ion-content class="feed-modal-split">
 	  <ion-audio-track class="feed-modal-content">
-		  <h4 class="feed-modal-title">{{feed.title | limitTo:42}}{{feed.title.length > 42 ? '..':''}}</h4>
+		  <h4 class="feed-modal-title">{{feed.title | limitTo:34}}{{feed.title.length > 34 ? '..':''}}</h4>
 		  <p class="feed-modal-subtitle">{{feed.source}}</p>
-				<ion-audio-controls>
-		  		<ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
-					<p class="feed-modal-author">Author: {{feed.author}}</p>
-					<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
-					<a href class="feed-modal-playbtn" ng-click="stopPlayback()">
-						<span ion-audio-play></i></span>
-					</a>
-		  	</ion-audio-controls>
+				
+			<ion-audio-controls>
+	  		<ion-audio-progress-bar display-time track="track">
+	  		</ion-audio-progress-bar>
+  			<!-- <span ng-if="dynamicTrack.duration">{{dynamicTrack.duration}}</span> -->
+
+				<p class="feed-modal-author">Author: {{feed.author}}</p>
+				<p class="feed-modal-narrator">Narrated by: {{feed.narrator}}</p>
+				<a class="feed-modal-playbtn" ng-click="pausePlay(feed)">
+					<i class="ion ion-ios-pause-outline" ng-if="isPlaying"></i>
+					<i class="ion ion-ios-play-outline" ng-if="!isPlaying"></i>
+				</a>
+	  	</ion-audio-controls>
+
 		</ion-audio-track>
   </ion-content>
 </ion-modal-view>

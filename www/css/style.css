@@ -1,5 +1,9 @@
 /*focus #00c7ff*/
+html {
+	min-height: 100%;
+}
 body {
+	min-height: 100%;
 	background-color: #000;
 	color: #fff;
 }
@@ -214,7 +218,7 @@ a.item-content.activated, a.item-content:focus{
 .player-close {
   font-size: 50px;
   z-index: 999;
-  top: 25px;
+  top: 10px;
   left: 25px;
   color: #fff;
   text-shadow: 1px 1px 6px #000;
@@ -245,15 +249,13 @@ a.item-content.activated, a.item-content:focus{
   display: inline-block;
 }
 .pause-btn {
-	float: right;
-  margin-top: -38px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 50%;
-  border: 1px solid #fff;
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
   background: none;
+  border: none;
   color: #fff;
-  margin-right: 7px;	
+  font-size: 34px;
 }
 button.player-close:focus, button.player-close:active{
 	color: #00c7ff;
@@ -369,6 +371,24 @@ h2.article-title {
   position: relative;
   margin-left: 44.1%;
   margin-top: 26px;
+  z-index: 999;
+}
+.spinner-dots svg {
+	stroke: #fff;
+	fill: #fff;
+	width: 20px;
+	position: absolute;
+	right: 27px;
+	top: 19px;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.2);
 }
 /******** ARTICLE DETAIL PAGE ***********/
 .article-detail {
