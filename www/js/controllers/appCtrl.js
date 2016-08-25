@@ -1,9 +1,10 @@
 var AppCtrl = angular.module('odi.controllers', [])
 
-.controller('AppCtrl',['$scope', '$ionicModal', '$timeout', '$rootScope', '$ionicSideMenuDelegate', '$state', 'Articles', function($scope, $ionicModal, $timeout, $rootScope, $ionicSideMenuDelegate, $state, Articles) {
-  $scope.user = false;
-  // Form data for the login modal
-  $scope.loginData = {};
+.controller('AppCtrl',['$scope', '$ionicModal', '$timeout', '$rootScope', '$ionicSideMenuDelegate', '$state', 'Articles', 'Auth', 'FURL', function($scope, $ionicModal, $timeout, $rootScope, $ionicSideMenuDelegate, $state, Articles, Auth, FURL) {
+
+    $scope.user = false;
+    // Form data for the login modal
+    $scope.loginData = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -45,6 +46,8 @@ var AppCtrl = angular.module('odi.controllers', [])
           // $rootScope.user = authData;
           $scope.user.avatar = authData.facebook.profileImageURL;
           $scope.user.name = authData.facebook.displayName;
+
+
           $state.go('app.categories');
         });
 
@@ -102,6 +105,7 @@ var AppCtrl = angular.module('odi.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };  
+
 }]);
 
 

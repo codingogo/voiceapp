@@ -78,6 +78,16 @@ angular.module('odi',
     }
   })
 
+  .state('app.popular', {
+    url: '/popular',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/popular.html',
+        controller: 'PlaylistsCtrl'
+      }
+    }
+  })  
+
   .state('app.setting', {
     url: '/setting',
     views: {

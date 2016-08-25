@@ -1,7 +1,7 @@
-<ion-view view-title="MY PLAYLIST">
+<ion-view view-title="POPULAR">
   <ion-content>
     <ion-list>
-	    <ion-audio-track class="item item-article" ng-repeat="track in articles | filter:categoryFilter" style="background-image:url({{track.image}}); background-size:cover; background-position:center" track="track">
+	    <ion-audio-track class="item item-article article-list-item" ng-repeat="track in articles | filter:{popular:true}" style="background-image:url({{track.image}}); background-size:cover; background-position:center" track="track">
 	    	<ion-audio-controls>
 			    <a class="item-thumbnail-left article-layer" >
 				    <div class="article-ls">
@@ -9,15 +9,26 @@
 							<p class="article-source">{{track.source}}</p>
 						</div>	
 					</a>
+
 					<ion-spinner icon="ripple"></ion-spinner>
 					<div class="overlay" ng-if="isLoading"></div>
 					
-					<a ng-click="play(track, $index)" class="play-article" ion-audio-play>
-					</a>	
-				
-					<a class="remove-article" ng-click="removeArticle(track, $index)">
-						<span><i class="icon ion-ios-minus-outline"></i></span>
+					<a ng-click="playTrack(track, $index)" class="play-article" ion-audio-play >
 					</a>
+		
+					<a ng-show="!user"
+						 class="add-article">
+						<i class="icon ion-ios-plus-outline" style="color:grey"></i>
+					</a>
+
+					<a ng-show="user"
+						 class="add-article"
+						 ng-click="addTrack(track, $index, user)">
+						<span>
+							<i class="icon ion-ios-plus-outline"></i>
+						</span>
+					</a>
+										
 				</ion-audio-controls>
 	    </ion-audio-track>
     </ion-list>
